@@ -427,18 +427,6 @@ const styles = {
         background: "rgba(255,255,255,0.12)",
         border: "1px solid rgba(255,255,255,0.22)",
     },
-
-    footer: {
-        marginTop: 26,
-        color: palette.sub,
-        fontSize: 13,
-        display: "flex",
-        justifyContent: "space-between",
-        gap: 12,
-        flexWrap: "wrap",
-        padding: "10px 2px 0",
-    },
-    footerLinks: { display: "flex", gap: 12, flexWrap: "wrap" },
 } satisfies Record<string, CSSProperties>;
 
 export default function Home() {
@@ -1054,24 +1042,21 @@ export default function Home() {
                     </div>
                 </section>
 
-                {/* FOOTER */}
-                <footer style={styles.footer}>
-                    <div>© {year} Movenco</div>
-                    <div style={styles.footerLinks}>
-                        <Link href="/privacy" style={styles.navLink}>
-                            Privacy
-                        </Link>
-                        <Link href="/terms" style={styles.navLink}>
-                            Terms
-                        </Link>
-                        <Link href="/legal" style={styles.navLink}>
-                            Mentions légales
-                        </Link>
-                        <a href="#top" style={styles.navLink}>
-                            Haut de page ↑
-                        </a>
-                    </div>
-                </footer>
+                <div>© {year} Movenco</div>
+                <div>
+                    <Link href="/privacy" style={styles.navLink}>
+                        Privacy
+                    </Link>
+                    <Link href="/terms" style={styles.navLink}>
+                        Terms
+                    </Link>
+                    <Link href="/legal" style={styles.navLink}>
+                        Mentions légales
+                    </Link>
+                    <a href="#top" style={styles.navLink}>
+                        Haut de page ↑
+                    </a>
+                </div>
 
                 {/* ✅ CSS global (no JS / no handlers) */}
                 <style>{`

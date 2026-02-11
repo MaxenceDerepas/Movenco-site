@@ -1,11 +1,11 @@
-// app/privacy/page.tsx
 import Link from "next/link";
 import type { Metadata } from "next";
+import type { CSSProperties } from "react";
 
 export const metadata: Metadata = {
     title: "Politique de confidentialité — Movenco",
     description:
-        "Politique de confidentialité Movenco : données collectées, finalités, bases légales, conservation, sous-traitants, sécurité et droits RGPD.",
+        "Politique de confidentialité Movenco : données collectées, finalités, bases légales, conservation, sous-traitants, sécurité, consentement publicitaire et droits RGPD.",
 };
 
 const palette = {
@@ -227,29 +227,48 @@ const styles: Record<string, React.CSSProperties> = {
 export default function PrivacyPage() {
     const year = new Date().getFullYear();
 
-    // ✅ À personnaliser
-    const updatedAt = "06/02/2026";
-    const controllerName = "MOVENCO (À REMPLACER — raison sociale / nom)";
-    const controllerAddress = "Adresse (À REMPLACER)";
-    const controllerEmail = "movencoapp@gmail.com"; // remplace si besoin
-    const dpoEmail = "movencoapp@gmail.com"; // si tu as un DPO dédié, remplace
-    const hostingProvider = "Hébergeur (À REMPLACER : nom + adresse)";
+    const updatedAt = "11/02/2026";
+
+    /**
+     * ✅ Responsable de traitement (RGPD)
+     * Pour un AE, le “responsable” peut être ton nom.
+     * Si tu crées une société plus tard, remplace ici (raison sociale, adresse).
+     */
+    const controllerName = "Maxence Derepas (Movenco)";
+    const controllerAddress =
+        "France (adresse légale communiquée dans les Mentions légales)";
+
+    const controllerEmail = "movencoapp@gmail.com";
+    const dpoEmail = "movencoapp@gmail.com"; // si pas de DPO dédié, mets ton email
+
+    /**
+     * ✅ Infrastructure (à compléter précisément quand tu figes la prod)
+     * - Site : Vercel (déjà OK)
+     * - API/DB : à préciser (Render/Fly/VPS + Mongo Atlas, etc.)
+     */
+    const websiteHosting = "Vercel Inc. (site web)";
+    const apiHosting =
+        "À préciser : hébergeur de l’API (ex. Render/Fly/VPS) + localisation";
+    const databaseProvider =
+        "À préciser : fournisseur DB (ex. MongoDB Atlas) + localisation";
 
     const toc = [
-        { id: "who", label: "1. Qui est responsable ?" },
+        { id: "who", label: "1. Responsable & contact" },
         { id: "scope", label: "2. Portée" },
         { id: "data", label: "3. Données collectées" },
         { id: "purposes", label: "4. Finalités" },
         { id: "legal", label: "5. Bases légales" },
-        { id: "retention", label: "6. Conservation" },
-        { id: "recipients", label: "7. Destinataires" },
-        { id: "processors", label: "8. Sous-traitants" },
-        { id: "transfers", label: "9. Transferts hors UE" },
-        { id: "security", label: "10. Sécurité" },
-        { id: "rights", label: "11. Vos droits (RGPD)" },
-        { id: "minors", label: "12. Mineurs" },
-        { id: "cookies", label: "13. Cookies / traceurs" },
-        { id: "contact", label: "14. Contact & CNIL" },
+        { id: "ads", label: "6. Publicité & consentement" },
+        { id: "retention", label: "7. Conservation" },
+        { id: "recipients", label: "8. Destinataires" },
+        { id: "processors", label: "9. Sous-traitants" },
+        { id: "transfers", label: "10. Transferts hors UE" },
+        { id: "security", label: "11. Sécurité" },
+        { id: "rights", label: "12. Vos droits (RGPD)" },
+        { id: "delete", label: "13. Suppression de compte" },
+        { id: "minors", label: "14. Mineurs" },
+        { id: "cookies", label: "15. Cookies / traceurs" },
+        { id: "contact", label: "16. Contact & CNIL" },
     ];
 
     return (
@@ -272,6 +291,13 @@ export default function PrivacyPage() {
                         >
                             Conditions
                         </Link>
+                        <Link
+                            href="/legal"
+                            style={styles.btn}
+                            className="btnHover"
+                        >
+                            Mentions légales
+                        </Link>
                         <a
                             href="#contact"
                             style={styles.btn}
@@ -289,14 +315,15 @@ export default function PrivacyPage() {
                             Politique de confidentialité
                         </h1>
                         <p style={styles.subtitle}>
-                            Ce document décrit comment {controllerName} traite
-                            les données personnelles dans le cadre de
-                            l’utilisation de Movenco (site vitrine et
-                            application).
+                            Ce document décrit comment{" "}
+                            <strong>{controllerName}</strong> traite les données
+                            personnelles dans le cadre de l’utilisation de
+                            Movenco (site vitrine et application).
                         </p>
                         <div style={styles.metaRow}>
                             <span style={styles.pill}>🛡️ RGPD</span>
-                            <span style={styles.pill}>🔒 Confidentialité</span>
+                            <span style={styles.pill}>📍 Localisation</span>
+                            <span style={styles.pill}>📣 Publicité</span>
                             <span style={styles.pill}>
                                 📅 Mise à jour : {updatedAt}
                             </span>
@@ -326,75 +353,105 @@ export default function PrivacyPage() {
 
                     <article style={styles.content}>
                         <section id="who" style={styles.section}>
-                            <h2 style={styles.h2}>1. Qui est responsable ?</h2>
+                            <h2 style={styles.h2}>1. Responsable & contact</h2>
                             <p style={styles.p}>
                                 Le responsable de traitement est :{" "}
                                 <strong>{controllerName}</strong>,{" "}
                                 {controllerAddress}.
                                 <br />
-                                Contact : <strong>{controllerEmail}</strong>.
+                                Email :{" "}
+                                <a
+                                    href={`mailto:${controllerEmail}`}
+                                    style={{
+                                        color: palette.primary,
+                                        fontWeight: 950,
+                                        textDecoration: "none",
+                                    }}
+                                >
+                                    {controllerEmail}
+                                </a>
+                                .
                             </p>
                             <div style={styles.callout}>
                                 <p style={styles.calloutTitle}>
-                                    📌 Mentions à compléter
+                                    ✅ Transparence “stores”
                                 </p>
                                 <p style={styles.calloutText}>
-                                    Ajoute ici : forme juridique, SIRET,
-                                    directeur de publication (LCEN), et un
-                                    contact DPO si applicable.
+                                    Movenco propose des fonctionnalités sociales
+                                    (profil, chat, événements) et peut afficher
+                                    des publicités. Les choix de consentement
+                                    publicitaire peuvent être modifiés dans
+                                    l’application (Paramètres de
+                                    confidentialité).
                                 </p>
                             </div>
                         </section>
 
                         <section id="scope" style={styles.section}>
                             <h2 style={styles.h2}>2. Portée</h2>
-                            <p style={styles.p}>
-                                Cette politique s’applique au site movenco.com
-                                (vitrine) et à l’application Movenco. Certains
-                                traitements dépendent des fonctionnalités
-                                activées (géolocalisation, chat, événements,
-                                etc.).
-                            </p>
+                            <p style={styles.p}>Cette politique s’applique :</p>
+                            <ul style={styles.ul}>
+                                <li>
+                                    au site vitrine movenco.com (informations
+                                    générales)
+                                </li>
+                                <li>
+                                    à l’application Movenco (fonctionnalités
+                                    sociales)
+                                </li>
+                            </ul>
                         </section>
 
                         <section id="data" style={styles.section}>
                             <h2 style={styles.h2}>3. Données collectées</h2>
                             <ul style={styles.ul}>
                                 <li>
-                                    <strong>Compte</strong> : identifiants,
-                                    nom/pseudo, photo de profil, âge/date de
-                                    naissance, genre (si renseigné).
-                                </li>
-                                <li>
-                                    <strong>Sports & préférences</strong> :
-                                    sports sélectionnés, filtres, préférences
-                                    d’affichage.
+                                    <strong>Compte & profil</strong> :
+                                    identifiants de connexion (ex. numéro de
+                                    téléphone), nom/pseudo, photo de profil,
+                                    date de naissance (ou âge), genre (si
+                                    renseigné), sports.
                                 </li>
                                 <li>
                                     <strong>Localisation</strong> : position
-                                    (précise ou approximative) si l’utilisateur
-                                    l’active.
+                                    (précise ou approximative) lorsque
+                                    l’utilisateur l’autorise, afin d’afficher
+                                    les utilisateurs et événements autour de
+                                    lui.
                                 </li>
                                 <li>
-                                    <strong>Contenus</strong> : messages,
-                                    contenus publiés, commentaires, réactions
-                                    (si activés).
+                                    <strong>Contenus</strong> : messages privés,
+                                    conversations de groupe liées aux
+                                    événements, contenus publiés (si activés),
+                                    commentaires, réactions.
                                 </li>
                                 <li>
-                                    <strong>Événements</strong> : sorties
-                                    créées/rejointes, participation,
-                                    informations associées.
+                                    <strong>Événements</strong> : événements
+                                    créés ou rejoints, participation,
+                                    informations associées (titre, lieu,
+                                    description…).
                                 </li>
                                 <li>
-                                    <strong>Données techniques</strong> : logs,
+                                    <strong>Médias</strong> : photos/avatars
+                                    sélectionnés par l’utilisateur (si ajoutés).
+                                </li>
+                                <li>
+                                    <strong>Données techniques</strong> :
                                     adresse IP, identifiants techniques,
-                                    diagnostics/crash (sécurité & performance).
+                                    journaux (sécurité/anti-abus), données de
+                                    diagnostic (crash/performance).
+                                </li>
+                                <li>
+                                    <strong>Publicité</strong> : informations
+                                    liées au consentement, identifiants
+                                    publicitaires (selon votre choix et les
+                                    réglages du système).
                                 </li>
                             </ul>
                             <p style={styles.p}>
-                                Les données marquées comme obligatoires sont
-                                nécessaires au fonctionnement du service. Les
-                                autres sont optionnelles.
+                                Les données strictement nécessaires au service
+                                sont requises. Les autres données sont
+                                optionnelles.
                             </p>
                         </section>
 
@@ -402,27 +459,26 @@ export default function PrivacyPage() {
                             <h2 style={styles.h2}>4. Finalités</h2>
                             <ul style={styles.ul}>
                                 <li>
-                                    Création et gestion du compte utilisateur.
+                                    Créer et gérer votre compte utilisateur.
                                 </li>
                                 <li>
-                                    Fourniture du service (matching local,
-                                    filtres, chats, groupes, événements).
+                                    Fournir le service (matching local,
+                                    recherche, chats, groupes, événements).
                                 </li>
                                 <li>
-                                    Prévention de la fraude, modération et
-                                    sécurité.
+                                    Sécuriser le service (prévention fraude,
+                                    modération, lutte anti-abus).
                                 </li>
                                 <li>
-                                    Support utilisateurs et gestion des
-                                    demandes.
+                                    Support (réponses aux demandes, assistance).
                                 </li>
                                 <li>
-                                    Amélioration continue (performance,
-                                    stabilité, UX) via analyses techniques.
+                                    Amélioration technique (stabilité,
+                                    performance, qualité de service).
                                 </li>
                                 <li>
-                                    Respect des obligations légales (si
-                                    applicables).
+                                    Respect d’obligations légales (si
+                                    applicable).
                                 </li>
                             </ul>
                         </section>
@@ -436,31 +492,89 @@ export default function PrivacyPage() {
                                     service.
                                 </li>
                                 <li>
-                                    <strong>Consentement</strong> : localisation
-                                    précise, notifications, cookies non
-                                    essentiels, communications marketing (si
-                                    activées).
+                                    <strong>Consentement</strong> : accès à la
+                                    localisation, notifications, certains
+                                    traceurs et publicités personnalisées (selon
+                                    votre choix).
                                 </li>
                                 <li>
                                     <strong>Intérêt légitime</strong> :
-                                    sécurité, lutte anti-abus, amélioration du
-                                    service.
+                                    sécurité, lutte anti-abus, prévention
+                                    fraude, amélioration du service.
                                 </li>
                                 <li>
-                                    <strong>Obligation légale</strong> :
-                                    conservation imposée par la réglementation
-                                    (si applicable).
+                                    <strong>Obligation légale</strong> : lorsque
+                                    la loi impose une conservation ou une
+                                    communication.
                                 </li>
                             </ul>
                         </section>
 
+                        <section id="ads" style={styles.section}>
+                            <h2 style={styles.h2}>
+                                6. Publicité & consentement
+                            </h2>
+                            <p style={styles.p}>
+                                Movenco peut afficher des publicités. Selon
+                                votre pays et vos choix, des publicités{" "}
+                                <strong>personnalisées</strong> (basées sur des
+                                intérêts) ou <strong>non personnalisées</strong>{" "}
+                                peuvent être affichées.
+                            </p>
+                            <ul style={styles.ul}>
+                                <li>
+                                    <strong>
+                                        Gestion du consentement (CMP)
+                                    </strong>{" "}
+                                    : vous pouvez accepter/refuser et gérer vos
+                                    options. Dans l’app, accédez à{" "}
+                                    <strong>
+                                        Profil → Paramètres de confidentialité
+                                    </strong>
+                                    .
+                                </li>
+                                <li>
+                                    <strong>iOS (ATT)</strong> : si nécessaire,
+                                    l’autorisation “Suivi” (App Tracking
+                                    Transparency) peut être demandée. En cas de
+                                    refus, Movenco limite le suivi publicitaire.
+                                </li>
+                                <li>
+                                    <strong>Android (AD_ID)</strong> :
+                                    l’identifiant publicitaire Android peut être
+                                    utilisé selon vos réglages et votre
+                                    consentement.
+                                </li>
+                                <li>
+                                    <strong>Localisation et publicité</strong> :
+                                    la localisation est utilisée principalement
+                                    pour les fonctionnalités “Autour de moi”. Si
+                                    des partenaires publicitaires utilisent des
+                                    signaux de localisation, cela dépend de
+                                    votre consentement et des paramètres CMP.
+                                </li>
+                            </ul>
+
+                            <div style={styles.callout}>
+                                <p style={styles.calloutTitle}>
+                                    ✅ Conseil (simplicité & conformité)
+                                </p>
+                                <p style={styles.calloutText}>
+                                    Si tu veux éviter toute ambiguïté, tu peux
+                                    configurer tes pubs en “non personnalisées”
+                                    par défaut, et n’activer la personnalisation
+                                    qu’après consentement explicite.
+                                </p>
+                            </div>
+                        </section>
+
                         <section id="retention" style={styles.section}>
-                            <h2 style={styles.h2}>6. Durées de conservation</h2>
+                            <h2 style={styles.h2}>7. Durées de conservation</h2>
                             <p style={styles.p}>
                                 Les données sont conservées pour la durée
                                 nécessaire aux finalités, puis supprimées ou
-                                anonymisées. Exemple de grille (à adapter à ton
-                                fonctionnement réel) :
+                                anonymisées. Exemple de grille indicative (à
+                                aligner avec ton fonctionnement réel) :
                             </p>
 
                             <div style={styles.tableWrap}>
@@ -485,9 +599,9 @@ export default function PrivacyPage() {
                                                 Durée du compte + 30 jours
                                             </td>
                                             <td style={styles.td}>
-                                                Suppression à la demande / après
-                                                suppression, purge différée pour
-                                                sécurité & restauration.
+                                                Après suppression, une purge
+                                                différée peut exister pour
+                                                sécurité et restauration.
                                             </td>
                                         </tr>
                                         <tr>
@@ -497,12 +611,14 @@ export default function PrivacyPage() {
                                                 </strong>
                                             </td>
                                             <td style={styles.td}>
-                                                Durée du compte
+                                                Durée du compte (ou
+                                                anonymisation)
                                             </td>
                                             <td style={styles.td}>
-                                                À adapter : suppression par
-                                                l’utilisateur, ou anonymisation
-                                                après fermeture du compte.
+                                                Selon les fonctionnalités :
+                                                suppression, anonymisation, ou
+                                                conservation limitée pour
+                                                modération/sécurité.
                                             </td>
                                         </tr>
                                         <tr>
@@ -513,9 +629,9 @@ export default function PrivacyPage() {
                                                 Temps nécessaire
                                             </td>
                                             <td style={styles.td}>
-                                                Idéalement en temps réel /
-                                                stockage limité (ex: dernière
-                                                position récente).
+                                                Principalement en temps réel ;
+                                                stockage limité à ce qui est
+                                                nécessaire au service.
                                             </td>
                                         </tr>
                                         <tr>
@@ -526,8 +642,8 @@ export default function PrivacyPage() {
                                                 6 à 12 mois
                                             </td>
                                             <td style={styles.td}>
-                                                Pour prévention fraude, sécurité
-                                                et investigations.
+                                                Prévention fraude, anti-abus et
+                                                sécurité.
                                             </td>
                                         </tr>
                                         <tr>
@@ -539,58 +655,69 @@ export default function PrivacyPage() {
                                             </td>
                                             <td style={styles.td}>
                                                 Historique des échanges pour
-                                                suivi et qualité de service.
+                                                suivi.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style={styles.td}>
+                                                <strong>
+                                                    Consentement pub
+                                                </strong>
+                                            </td>
+                                            <td style={styles.td}>
+                                                Selon exigence réglementaire
+                                            </td>
+                                            <td style={styles.td}>
+                                                Conservation de la preuve de
+                                                consentement lorsque requis.
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-
-                            <div style={styles.callout}>
-                                <p style={styles.calloutTitle}>✅ Très carré</p>
-                                <p style={styles.calloutText}>
-                                    Si tu as des paiements/abonnements plus
-                                    tard, ajoute une ligne “données de
-                                    facturation” + durée légale.
-                                </p>
-                            </div>
                         </section>
 
                         <section id="recipients" style={styles.section}>
-                            <h2 style={styles.h2}>
-                                7. Destinataires des données
-                            </h2>
+                            <h2 style={styles.h2}>8. Destinataires</h2>
                             <p style={styles.p}>
                                 Les données sont accessibles uniquement aux
-                                personnes habilitées (équipe Movenco) et, si
+                                personnes habilitées (Movenco) et, si
                                 nécessaire, aux prestataires techniques
-                                (sous-traitants) listés ci-dessous, dans la
-                                limite de leurs missions.
+                                (sous-traitants) dans la limite de leurs
+                                missions.
                             </p>
                         </section>
 
                         <section id="processors" style={styles.section}>
-                            <h2 style={styles.h2}>
-                                8. Sous-traitants (exemples)
-                            </h2>
+                            <h2 style={styles.h2}>9. Sous-traitants</h2>
+                            <p style={styles.p}>
+                                Exemples de prestataires pouvant intervenir
+                                (selon tes choix techniques) :
+                            </p>
                             <ul style={styles.ul}>
                                 <li>
-                                    <strong>
-                                        Hébergement / base de données
-                                    </strong>{" "}
-                                    : {hostingProvider} (à compléter).
+                                    <strong>Hébergement du site</strong> :{" "}
+                                    {websiteHosting}.
+                                </li>
+                                <li>
+                                    <strong>Hébergement API</strong> :{" "}
+                                    {apiHosting}.
+                                </li>
+                                <li>
+                                    <strong>Base de données</strong> :{" "}
+                                    {databaseProvider}.
                                 </li>
                                 <li>
                                     <strong>Stockage médias</strong> :
                                     Cloudinary (si utilisé).
                                 </li>
                                 <li>
-                                    <strong>Vérification SMS</strong> : Sinch /
-                                    Twilio (selon intégration).
+                                    <strong>Vérification SMS</strong> : Sinch
+                                    (si utilisé).
                                 </li>
                                 <li>
-                                    <strong>Email transactionnel</strong> :
-                                    Brevo (si utilisé).
+                                    <strong>Publicité</strong> : Google AdMob /
+                                    Google (si activé).
                                 </li>
                             </ul>
                             <p style={styles.p}>
@@ -601,94 +728,109 @@ export default function PrivacyPage() {
                         </section>
 
                         <section id="transfers" style={styles.section}>
-                            <h2 style={styles.h2}>
-                                9. Transferts hors Union Européenne
-                            </h2>
+                            <h2 style={styles.h2}>10. Transferts hors UE</h2>
                             <p style={styles.p}>
                                 Certains prestataires peuvent traiter des
-                                données hors de l’UE. Dans ce cas, nous mettons
-                                en place des garanties appropriées (par exemple,
-                                clauses contractuelles types) conformément au
-                                RGPD.
+                                données en dehors de l’Union Européenne (ex.
+                                USA). Dans ce cas, des garanties appropriées
+                                sont mises en place (par exemple, clauses
+                                contractuelles types) conformément au RGPD.
                             </p>
-                            <div style={styles.callout}>
-                                <p style={styles.calloutTitle}>📌 À vérifier</p>
-                                <p style={styles.calloutText}>
-                                    Selon tes fournisseurs (Cloudinary / SMS /
-                                    analytics), précise les pays et les
-                                    garanties mises en place.
-                                </p>
-                            </div>
                         </section>
 
                         <section id="security" style={styles.section}>
-                            <h2 style={styles.h2}>10. Sécurité</h2>
+                            <h2 style={styles.h2}>11. Sécurité</h2>
                             <ul style={styles.ul}>
                                 <li>Chiffrement en transit (HTTPS/TLS).</li>
+                                <li>Contrôles d’accès et authentification.</li>
                                 <li>
-                                    Contrôles d’accès, authentification, gestion
-                                    des rôles.
+                                    Journalisation et protections anti-abus.
                                 </li>
-                                <li>
-                                    Journalisation et surveillance anti-abus.
-                                </li>
-                                <li>
-                                    Mesures de sauvegarde et de restauration (si
-                                    mises en place).
-                                </li>
-                                <li>
-                                    Principe de minimisation : seules les
-                                    données nécessaires sont traitées.
-                                </li>
+                                <li>Minimisation des données.</li>
                             </ul>
                         </section>
 
                         <section id="rights" style={styles.section}>
-                            <h2 style={styles.h2}>11. Vos droits (RGPD)</h2>
+                            <h2 style={styles.h2}>12. Vos droits (RGPD)</h2>
                             <p style={styles.p}>
-                                Vous disposez des droits suivants : accès,
-                                rectification, suppression, opposition,
-                                limitation, portabilité, et retrait du
-                                consentement (lorsqu’il s’applique).
+                                Vous disposez des droits : accès, rectification,
+                                suppression, opposition, limitation,
+                                portabilité, et retrait du consentement
+                                (lorsqu’il s’applique).
                             </p>
                             <div style={styles.callout}>
                                 <p style={styles.calloutTitle}>
                                     📩 Exercer vos droits
                                 </p>
                                 <p style={styles.calloutText}>
-                                    Contact : <strong>{dpoEmail}</strong>. Nous
-                                    pouvons demander une preuve d’identité en
-                                    cas de doute raisonnable.
+                                    Email :{" "}
+                                    <a
+                                        href={`mailto:${dpoEmail}`}
+                                        style={{
+                                            color: palette.primary,
+                                            fontWeight: 950,
+                                            textDecoration: "none",
+                                        }}
+                                    >
+                                        {dpoEmail}
+                                    </a>
+                                    . Nous pouvons demander une preuve
+                                    d’identité en cas de doute raisonnable.
                                 </p>
                             </div>
                         </section>
 
-                        <section id="minors" style={styles.section}>
-                            <h2 style={styles.h2}>12. Mineurs</h2>
+                        <section id="delete" style={styles.section}>
+                            <h2 style={styles.h2}>13. Suppression de compte</h2>
                             <p style={styles.p}>
-                                Le service est destiné à des utilisateurs
-                                capables de consentir au traitement de leurs
-                                données. Si tu cibles des mineurs, il faut
-                                définir des règles spécifiques (âge minimal,
-                                consentement parental, etc.).
+                                Vous pouvez supprimer votre compte depuis
+                                l’application. Les étapes sont décrites sur la
+                                page{" "}
+                                <Link
+                                    href="/delete-account"
+                                    style={{
+                                        color: palette.primary,
+                                        fontWeight: 950,
+                                        textDecoration: "none",
+                                    }}
+                                >
+                                    Suppression de compte
+                                </Link>
+                                .
+                            </p>
+                        </section>
+
+                        <section id="minors" style={styles.section}>
+                            <h2 style={styles.h2}>14. Mineurs</h2>
+                            <p style={styles.p}>
+                                Movenco n’est pas destiné aux enfants. L’accès
+                                au service est recommandé à partir de{" "}
+                                <strong>16 ans</strong> (ou plus, selon le
+                                contexte et la législation applicable). Si vous
+                                êtes parent et pensez qu’un mineur nous a
+                                transmis des données, contactez-nous.
                             </p>
                             <div style={styles.callout}>
-                                <p style={styles.calloutTitle}>⚠️ À décider</p>
+                                <p style={styles.calloutTitle}>
+                                    ✅ Store-friendly
+                                </p>
                                 <p style={styles.calloutText}>
-                                    Indique un âge minimum d’accès (ex: 16+ ou
-                                    18+) selon ton positionnement.
+                                    16+ est souvent un bon compromis pour une
+                                    app sociale avec géoloc + chat. Si tu veux
+                                    “zéro risque”, tu peux passer à 18+ (mais ça
+                                    réduit le marché).
                                 </p>
                             </div>
                         </section>
 
                         <section id="cookies" style={styles.section}>
-                            <h2 style={styles.h2}>13. Cookies / traceurs</h2>
+                            <h2 style={styles.h2}>15. Cookies / traceurs</h2>
                             <p style={styles.p}>
                                 Sur le site vitrine, nous utilisons soit aucun
                                 traceur, soit uniquement des cookies strictement
-                                nécessaires. Si des outils d’audience/marketing
-                                sont ajoutés, un bandeau de consentement sera
-                                mis en place.
+                                nécessaires. Si des outils de mesure
+                                d’audience/marketing sont ajoutés, un bandeau de
+                                consentement sera mis en place.
                             </p>
                         </section>
 
@@ -696,13 +838,23 @@ export default function PrivacyPage() {
                             id="contact"
                             style={{ ...styles.section, borderBottom: "none" }}
                         >
-                            <h2 style={styles.h2}>14. Contact & CNIL</h2>
+                            <h2 style={styles.h2}>16. Contact & CNIL</h2>
                             <p style={styles.p}>
-                                Contact : <strong>{controllerEmail}</strong>
+                                Email :{" "}
+                                <a
+                                    href={`mailto:${controllerEmail}`}
+                                    style={{
+                                        color: palette.primary,
+                                        fontWeight: 950,
+                                        textDecoration: "none",
+                                    }}
+                                >
+                                    {controllerEmail}
+                                </a>
                                 <br />
-                                Vous pouvez également déposer une réclamation
-                                auprès de la CNIL (autorité française de
-                                protection des données).
+                                Si vous estimez, après nous avoir contactés, que
+                                vos droits ne sont pas respectés, vous pouvez
+                                déposer une réclamation auprès de la CNIL.
                                 <br />
                                 Dernière mise à jour : {updatedAt}
                             </p>
@@ -716,8 +868,14 @@ export default function PrivacyPage() {
                         <Link href="/" style={styles.link}>
                             Accueil
                         </Link>
+                        <Link href="/legal" style={styles.link}>
+                            Legal
+                        </Link>
                         <Link href="/terms" style={styles.link}>
                             Terms
+                        </Link>
+                        <Link href="/delete-account" style={styles.link}>
+                            Delete account
                         </Link>
                         <a href="#top" style={styles.link}>
                             Haut de page ↑

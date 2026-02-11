@@ -2,11 +2,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
+import React from "react";
 
 export const metadata: Metadata = {
     title: "Press Kit — Movenco",
     description:
         "Press kit officiel Movenco : pitch, logos, screenshots, contact.",
+    // (optionnel) si tu as une image OG dédiée press :
+    // openGraph: { images: [{ url: "/press/og-press.jpg", width: 1200, height: 630 }] },
 };
 
 const palette = {
@@ -17,6 +20,7 @@ const palette = {
     sub: "#64748b",
     card: "#ffffff",
     border: "#e5e7eb",
+    subtle: "#eef2f3",
 };
 
 const styles: Record<string, React.CSSProperties> = {
@@ -24,12 +28,18 @@ const styles: Record<string, React.CSSProperties> = {
     container: { maxWidth: 980, margin: "0 auto", padding: "22px 18px 54px" },
 
     top: {
+        position: "sticky",
+        top: 0,
+        zIndex: 50,
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
         gap: 12,
         flexWrap: "wrap",
-        paddingBottom: 12,
+        padding: "12px 4px",
+        background: "rgba(246,247,248,0.72)",
+        backdropFilter: "blur(12px)",
+        borderBottom: "1px solid rgba(229,231,235,0.9)",
     },
     brand: { display: "flex", alignItems: "center", gap: 10 },
     logo: {
@@ -76,8 +86,17 @@ const styles: Record<string, React.CSSProperties> = {
         background: "white",
         boxShadow: "0 20px 70px rgba(15,23,42,0.09)",
         overflow: "hidden",
+        position: "relative",
     },
-    heroInner: { padding: "18px 18px" },
+    heroBg: {
+        position: "absolute",
+        inset: 0,
+        background: `radial-gradient(900px 340px at 15% 0%, rgba(43,106,92,0.16), transparent 60%),
+                 radial-gradient(900px 340px at 90% 10%, rgba(31,79,69,0.12), transparent 55%),
+                 linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,1))`,
+        pointerEvents: "none",
+    },
+    heroInner: { position: "relative", padding: "18px 18px" },
     title: { margin: 0, fontSize: 28, letterSpacing: -0.6, fontWeight: 980 },
     sub: { marginTop: 8, marginBottom: 0, color: palette.sub, lineHeight: 1.6 },
 
@@ -131,23 +150,28 @@ const styles: Record<string, React.CSSProperties> = {
         borderRadius: 18,
         overflow: "hidden",
         border: `1px solid ${palette.border}`,
-        background: "#eef2f3",
+        background: palette.subtle,
         aspectRatio: "9 / 16",
     },
 
-    footer: {
-        marginTop: 22,
+    note: {
+        marginTop: 12,
+        borderRadius: 16,
+        border: "1px solid rgba(43,106,92,0.20)",
+        background: "rgba(43,106,92,0.06)",
+        padding: 12,
+    },
+    noteTitle: { margin: 0, fontSize: 13, fontWeight: 980 },
+    noteText: {
+        margin: "6px 0 0",
         color: palette.sub,
         fontSize: 13,
-        display: "flex",
-        justifyContent: "space-between",
-        gap: 12,
-        flexWrap: "wrap",
+        lineHeight: 1.6,
     },
 };
 
 export default function PressPage() {
-    const year = new Date().getFullYear();
+    const contactEmail = "movencoapp@gmail.com";
 
     return (
         <main style={styles.page}>
@@ -159,34 +183,46 @@ export default function PressPage() {
                     </div>
 
                     <div style={styles.btnRow}>
-                        <Link href="/" style={styles.btn}>
+                        <Link href="/" style={styles.btn} className="btnHover">
                             ← Retour
                         </Link>
-                        <Link href="/privacy" style={styles.btn}>
+                        <Link
+                            href="/privacy"
+                            style={styles.btn}
+                            className="btnHover"
+                        >
                             Confidentialité
                         </Link>
-                        <Link href="/terms" style={styles.btn}>
+                        <Link
+                            href="/terms"
+                            style={styles.btn}
+                            className="btnHover"
+                        >
                             Conditions
                         </Link>
-                        <a href="#contact" style={styles.btnPrimary}>
+                        <a
+                            href="#contact"
+                            style={styles.btnPrimary}
+                            className="btnHover"
+                        >
                             📩 Contact
                         </a>
                     </div>
                 </header>
 
                 <section style={styles.hero}>
+                    <div style={styles.heroBg} />
                     <div style={styles.heroInner}>
                         <h1 style={styles.title}>Press Kit</h1>
                         <p style={styles.sub}>
                             Ressources officielles : pitch, logos, screenshots
-                            et infos produit. Remplace les assets quand tu veux
-                            — la page est déjà prête.
+                            et infos produit. Remplace les assets quand tu veux.
                         </p>
                     </div>
                 </section>
 
                 <section style={styles.grid2}>
-                    <div style={styles.card}>
+                    <div style={styles.card} className="cardHover">
                         <h2 style={styles.cardTitle}>Pitch court</h2>
                         <p style={styles.text}>
                             Movenco connecte les sportifs proches (trail, route,
@@ -195,7 +231,7 @@ export default function PressPage() {
                         </p>
                     </div>
 
-                    <div style={styles.card}>
+                    <div style={styles.card} className="cardHover">
                         <h2 style={styles.cardTitle}>Pitch long</h2>
                         <p style={styles.text}>
                             Movenco est une application de réseau sportif local.
@@ -207,23 +243,26 @@ export default function PressPage() {
                         </p>
                     </div>
 
-                    <div style={styles.card}>
+                    <div style={styles.card} className="cardHover">
                         <h2 style={styles.cardTitle}>Fiche produit</h2>
                         <p style={styles.text}>
-                            • Plateformes : iOS / Android (bientôt) <br />
-                            • Catégories : sport, outdoor, social <br />
+                            • Plateformes : iOS / Android (bientôt)
+                            <br />
+                            • Catégories : sport, outdoor, social
+                            <br />
                             • Fonctionnalités : autour de moi, filtres, chats,
-                            groupes, événements <br />• Données : transparence +
-                            pages légales accessibles
+                            groupes, événements
+                            <br />• Données : transparence + pages légales
+                            accessibles
                         </p>
                     </div>
 
-                    <div style={styles.card}>
+                    <div style={styles.card} className="cardHover">
                         <h2 style={styles.cardTitle}>Assets (à télécharger)</h2>
                         <p style={styles.text}>
-                            Place ces fichiers dans{" "}
-                            <strong>/public/press</strong> (logos, screenshots,
-                            etc.). Ensuite, ces boutons fonctionneront.
+                            Place tes fichiers dans{" "}
+                            <strong>/public/press</strong>. Les liens ci-dessous
+                            pointeront dessus.
                         </p>
                         <div style={styles.assetRow}>
                             <a
@@ -248,19 +287,26 @@ export default function PressPage() {
                                 🎨 Brand guidelines (pdf)
                             </a>
                         </div>
+
+                        <div style={styles.note}>
+                            <p style={styles.noteTitle}>✅ Recommandation</p>
+                            <p style={styles.noteText}>
+                                Ajoute aussi un <strong>logo SVG</strong> + une
+                                image <strong>OG</strong> :
+                                <code> /public/press/og-press.jpg</code>{" "}
+                                (1200×630).
+                            </p>
+                        </div>
                     </div>
                 </section>
 
                 <section style={{ marginTop: 14 }}>
-                    <div style={styles.card}>
-                        <h2 style={styles.cardTitle}>
-                            Screenshots (placeholders)
-                        </h2>
+                    <div style={styles.card} className="cardHover">
+                        <h2 style={styles.cardTitle}>Screenshots</h2>
                         <p style={styles.text}>
-                            Mets 3 images dans <strong>/public/press</strong> :
-                            <code> screen-1.jpg</code>,{" "}
-                            <code>screen-2.jpg</code>, <code>screen-3.jpg</code>
-                            .
+                            Mets 3 images dans <strong>/public/press</strong> :{" "}
+                            <code>screen-1.jpg</code>, <code>screen-2.jpg</code>
+                            , <code>screen-3.jpg</code>.
                         </p>
 
                         <div style={styles.shots} className="shots">
@@ -288,50 +334,61 @@ export default function PressPage() {
                 </section>
 
                 <section id="contact" style={{ marginTop: 14 }}>
-                    <div style={styles.card}>
-                        <h2 style={styles.cardTitle}>Contact</h2>
+                    <div style={styles.card} className="cardHover">
+                        <h2 style={styles.cardTitle}>Contact presse</h2>
                         <p style={styles.text}>
-                            Email : <strong>movencoapp@gmail.com</strong>{" "}
-                            (remplace par ton vrai mail)
+                            Email :{" "}
+                            <a
+                                href={`mailto:${contactEmail}`}
+                                style={{
+                                    color: palette.primary,
+                                    fontWeight: 950,
+                                    textDecoration: "none",
+                                }}
+                            >
+                                {contactEmail}
+                            </a>
                             <br />
-                            Option : ajoute un numéro / une adresse / un media
-                            kit Notion plus tard.
+                            (Tu pourras ajouter un numéro / dossier Notion /
+                            média kit plus tard.)
+                        </p>
+                        <p style={styles.text}>
+                            Liens utiles :{" "}
+                            <Link
+                                href="/privacy"
+                                style={{
+                                    color: palette.primary,
+                                    fontWeight: 900,
+                                    textDecoration: "none",
+                                }}
+                            >
+                                Confidentialité
+                            </Link>{" "}
+                            ·{" "}
+                            <Link
+                                href="/terms"
+                                style={{
+                                    color: palette.primary,
+                                    fontWeight: 900,
+                                    textDecoration: "none",
+                                }}
+                            >
+                                Conditions
+                            </Link>{" "}
+                            ·{" "}
+                            <Link
+                                href="/legal"
+                                style={{
+                                    color: palette.primary,
+                                    fontWeight: 900,
+                                    textDecoration: "none",
+                                }}
+                            >
+                                Mentions légales
+                            </Link>
                         </p>
                     </div>
                 </section>
-
-                <footer style={styles.footer}>
-                    <div>© {year} Movenco</div>
-                    <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-                        <Link
-                            href="/"
-                            style={{
-                                color: palette.sub,
-                                textDecoration: "none",
-                            }}
-                        >
-                            Accueil
-                        </Link>
-                        <Link
-                            href="/privacy"
-                            style={{
-                                color: palette.sub,
-                                textDecoration: "none",
-                            }}
-                        >
-                            Privacy
-                        </Link>
-                        <Link
-                            href="/terms"
-                            style={{
-                                color: palette.sub,
-                                textDecoration: "none",
-                            }}
-                        >
-                            Terms
-                        </Link>
-                    </div>
-                </footer>
 
                 <style>{`
           html { scroll-behavior: smooth; }

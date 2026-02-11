@@ -1,6 +1,7 @@
 // app/layout.tsx
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import SiteFooter from "./components/SiteFooter";
 
 export const metadata: Metadata = {
     title: "Movenco",
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 }}
             >
                 {children}
+                <SiteFooter />
             </body>
         </html>
     );
