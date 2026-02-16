@@ -8,12 +8,12 @@ export const metadata: Metadata = {
     title: "Movenco — Trouve des sportifs autour de toi",
     description:
         "Movenco connecte les passionnés (trail, route, VTT, rando, ski…). Découvre des sportifs autour de toi, échange, organise des sorties et événements simplement.",
-    metadataBase: new URL("https://movenco.com"), // ✅ change si besoin (ex: https://www.movenco.com)
+    metadataBase: new URL("https://www.movencoapp.com"), // ✅ change si besoin (ex: https://www.movenco.com)
     openGraph: {
         title: "Movenco — Trouve des sportifs autour de toi",
         description:
             "Découvre des sportifs autour de toi, échange, organise des sorties et événements — simplement.",
-        url: "https://movenco.com",
+        url: "https://www.movencoapp.com",
         siteName: "Movenco",
         images: [
             {

@@ -61,6 +61,12 @@ export default function SiteFooter() {
                         Mentions légales
                     </Link>
                     <Link
+                        href="/support"
+                        style={{ color: palette.sub, textDecoration: "none" }}
+                    >
+                        Support
+                    </Link>
+                    <Link
                         href="/delete-account"
                         style={{ color: palette.sub, textDecoration: "none" }}
                     >
