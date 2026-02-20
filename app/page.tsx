@@ -59,19 +59,14 @@ const styles: Record<string, CSSProperties> = {
         backdropFilter: "blur(12px)",
         borderBottom: "1px solid rgba(229,231,235,0.9)",
     },
-    brand: { display: "flex", alignItems: "center", gap: 10 },
-    logo: {
-        width: 40,
-        height: 40,
-        borderRadius: 12,
-        background: `linear-gradient(135deg, ${palette.primary}, ${palette.primary2})`,
-        display: "grid",
-        placeItems: "center",
-        color: "white",
-        fontWeight: 950,
-        letterSpacing: -0.5,
-        boxShadow: "0 10px 28px rgba(0,0,0,0.12)",
+    brand: {
+        display: "flex",
+        alignItems: "center",
+        gap: 10,
+        borderWidth: 1,
+        borderColor: "red",
     },
+
     brandName: { fontSize: 15, fontWeight: 950, letterSpacing: -0.2 },
 
     navLinks: {
@@ -287,7 +282,7 @@ export default function HomePage() {
                             height={40}
                             priority
                             style={{
-                                height: "40px",
+                                height: "100px", // ou 56px si tu veux encore plus visible
                                 width: "auto",
                                 display: "block",
                                 objectFit: "contain",
