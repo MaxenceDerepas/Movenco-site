@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
+import Image from "next/image";
 
 export const metadata: Metadata = {
     title: "Mentions légales — Movenco",
@@ -36,18 +37,7 @@ const styles: Record<string, CSSProperties> = {
         borderBottom: "1px solid rgba(229,231,235,0.9)",
     },
     brand: { display: "flex", alignItems: "center", gap: 10 },
-    logo: {
-        width: 40,
-        height: 40,
-        borderRadius: 12,
-        background: `linear-gradient(135deg, ${palette.primary}, ${palette.primary2})`,
-        boxShadow: "0 12px 35px rgba(0,0,0,0.14)",
-        display: "grid",
-        placeItems: "center",
-        color: "white",
-        fontWeight: 950,
-        letterSpacing: -0.5,
-    },
+
     brandName: { fontSize: 15, fontWeight: 950, letterSpacing: -0.2 },
 
     navLinks: {
@@ -240,8 +230,19 @@ export default function LegalPage() {
             <div style={styles.container}>
                 <header style={styles.nav}>
                     <div style={styles.brand}>
-                        <div style={styles.logo}>M</div>
-                        <div style={styles.brandName}>Movenco</div>
+                        <Image
+                            src="/logo-movenco.png" // ou /logo-movenco.png
+                            alt="Movenco"
+                            width={140}
+                            height={40}
+                            priority
+                            style={{
+                                height: "100px", // ou 56px si tu veux encore plus visible
+                                width: "auto",
+                                display: "block",
+                                objectFit: "contain",
+                            }}
+                        />
                     </div>
 
                     <div style={styles.navLinks}>
@@ -650,28 +651,47 @@ export default function LegalPage() {
                 </footer>
 
                 <style>{`
-          html { scroll-behavior: smooth; }
+           html { scroll-behavior: smooth; }
 
-          .btnHover {
-            transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease;
-          }
-          .btnHover:hover {
-            transform: translateY(-1px);
-            filter: brightness(1.02);
-            box-shadow: 0 18px 45px rgba(15,23,42,0.10);
-          }
+  .btnHover {
+    transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease;
+  }
+  .btnHover:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.02);
+    box-shadow: 0 18px 45px rgba(15,23,42,0.10);
+  }
 
-          .tocHover {
-            transition: background 160ms ease, transform 160ms ease;
-          }
-          .tocHover:hover {
-            background: rgba(43,106,92,0.06);
-            transform: translateY(-1px);
-          }
+  .tocHover {
+    transition: background 160ms ease, transform 160ms ease;
+  }
+  .tocHover:hover {
+    background: rgba(43,106,92,0.06);
+    transform: translateY(-1px);
+  }
 
-          @media (max-width: 980px) {
-            .layout { grid-template-columns: 1fr !important; }
-          }
+  @media (max-width: 980px) {
+    .layout {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* ✅ Le sommaire ne colle plus et ne masque plus le contenu */
+    aside[aria-label="Sommaire"] {
+      position: static !important;
+      top: auto !important;
+      max-height: none !important;
+      margin-bottom: 12px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    /* Optionnel : rend le sommaire compact si beaucoup d'items */
+    aside[aria-label="Sommaire"] ul {
+      max-height: 220px;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
         `}</style>
             </div>
         </main>
