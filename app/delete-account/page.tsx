@@ -1,11 +1,12 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
+import Image from "next/image";
 
 export const metadata: Metadata = {
-    title: "Delete Account — Movenco",
+    title: "Suppression de compte — Movenco",
     description:
-        "How to delete your Movenco account and what happens to your data.",
+        "Comment supprimer votre compte Movenco et ce qu’il advient de vos données.",
 };
 
 const palette = {
@@ -36,18 +37,7 @@ const styles: Record<string, CSSProperties> = {
         borderBottom: "1px solid rgba(229,231,235,0.9)",
     },
     brand: { display: "flex", alignItems: "center", gap: 10 },
-    logo: {
-        width: 40,
-        height: 40,
-        borderRadius: 12,
-        background: `linear-gradient(135deg, ${palette.primary}, ${palette.primary2})`,
-        boxShadow: "0 12px 35px rgba(0,0,0,0.14)",
-        display: "grid",
-        placeItems: "center",
-        color: "white",
-        fontWeight: 950,
-        letterSpacing: -0.5,
-    },
+
     brandName: { fontSize: 15, fontWeight: 950, letterSpacing: -0.2 },
 
     navLinks: {
@@ -185,26 +175,37 @@ export default function DeleteAccountPage() {
             <div style={styles.container}>
                 <header style={styles.nav}>
                     <div style={styles.brand}>
-                        <div style={styles.logo}>M</div>
-                        <div style={styles.brandName}>Movenco</div>
+                        <Image
+                            src="/logo-movenco.png" // ou /logo-movenco.png
+                            alt="Movenco"
+                            width={140}
+                            height={40}
+                            priority
+                            style={{
+                                height: "100px", // ou 56px si tu veux encore plus visible
+                                width: "auto",
+                                display: "block",
+                                objectFit: "contain",
+                            }}
+                        />
                     </div>
                     <div style={styles.navLinks}>
                         <Link href="/" style={styles.btn} className="btnHover">
-                            ← Home
+                            ← Accueil
                         </Link>
                         <Link
                             href="/privacy"
                             style={styles.btn}
                             className="btnHover"
                         >
-                            Privacy
+                            Confidentialité
                         </Link>
                         <Link
                             href="/terms"
                             style={styles.btn}
                             className="btnHover"
                         >
-                            Terms
+                            Conditions
                         </Link>
                     </div>
                 </header>
@@ -213,18 +214,23 @@ export default function DeleteAccountPage() {
                     <div style={styles.heroBg} />
                     <div style={styles.heroInner}>
                         <h1 style={styles.title}>
-                            Delete your Movenco account
+                            Supprimer votre compte Movenco
                         </h1>
                         <p style={styles.subtitle}>
-                            You can request account deletion directly in the
-                            Movenco app or by contacting support from this page.
+                            Vous pouvez demander la suppression de votre compte
+                            directement dans l’application Movenco ou en
+                            contactant le support depuis cette page.
                         </p>
                         <div style={styles.pillRow}>
-                            <span style={styles.pill}>🗑️ Account deletion</span>
-                            <span style={styles.pill}>📱 In-app available</span>
-                            <span style={styles.pill}>🌐 Web help page</span>
                             <span style={styles.pill}>
-                                📅 Updated: {updatedAt}
+                                🗑️ Suppression de compte
+                            </span>
+                            <span style={styles.pill}>
+                                📱 Disponible dans l’app
+                            </span>
+                            <span style={styles.pill}>🌐 Page d’aide web</span>
+                            <span style={styles.pill}>
+                                📅 Mise à jour : {updatedAt}
                             </span>
                         </div>
                     </div>
@@ -233,71 +239,83 @@ export default function DeleteAccountPage() {
                 <article style={styles.content}>
                     <section style={styles.section}>
                         <h2 style={styles.h2}>
-                            How to delete your account (in-app)
+                            Comment supprimer votre compte (dans l’app)
                         </h2>
                         <ul style={styles.ul}>
-                            <li>Open Movenco and sign in to your account.</li>
-                            <li>Go to your Profile / Settings.</li>
-                            <li>Tap “Delete my account”.</li>
-                            <li>Confirm the deletion request.</li>
+                            <li>Ouvrez Movenco et connectez-vous.</li>
+                            <li>Allez dans votre Profil / Paramètres.</li>
+                            <li>Appuyez sur « Supprimer mon compte ».</li>
+                            <li>Confirmez la demande de suppression.</li>
                         </ul>
 
                         <div style={styles.calloutWarn}>
                             <p style={styles.calloutTitle}>Important</p>
                             <p style={styles.calloutText}>
-                                Account deletion is permanent. Once confirmed,
-                                you will lose access to your Movenco account.
+                                La suppression du compte est définitive. Une
+                                fois confirmée, vous perdrez l’accès à votre
+                                compte Movenco.
                             </p>
                         </div>
                     </section>
 
                     <section style={styles.section}>
-                        <h2 style={styles.h2}>What is deleted</h2>
+                        <h2 style={styles.h2}>Ce qui est supprimé</h2>
                         <p style={styles.p}>
-                            When your account is deleted, Movenco deletes or
-                            cleans related data, including:
+                            Lorsque votre compte est supprimé, Movenco supprime
+                            ou nettoie les données liées, notamment :
                         </p>
                         <ul style={styles.ul}>
-                            <li>Your user account and profile access</li>
-                            <li>Your avatar (profile image), when available</li>
-                            <li>Your block relationships (both directions)</li>
-                            <li>Your verification codes</li>
-                            <li>Events created by you</li>
                             <li>
-                                Group chats linked to events you created (and
-                                related messages)
+                                Votre compte utilisateur et l’accès au profil
                             </li>
-                            <li>Your participation in joined events</li>
+                            <li>
+                                Votre avatar (photo de profil), lorsqu’il est
+                                disponible
+                            </li>
+                            <li>
+                                Vos relations de blocage (dans les deux sens)
+                            </li>
+                            <li>Vos codes de vérification</li>
+                            <li>Les événements créés par vous</li>
+                            <li>
+                                Les chats de groupe liés aux événements que vous
+                                avez créés (et les messages associés)
+                            </li>
+                            <li>Votre participation aux événements rejoints</li>
                         </ul>
                     </section>
 
                     <section style={styles.section}>
-                        <h2 style={styles.h2}>What happens to messages</h2>
+                        <h2 style={styles.h2}>Que deviennent les messages</h2>
                         <ul style={styles.ul}>
                             <li>
-                                Private conversations (DMs) are removed from
-                                your side (“deleted for me”).
+                                Les conversations privées (DM) sont retirées de
+                                votre côté (« supprimé pour moi »).
                             </li>
                             <li>
-                                If both participants deleted the same DM, the
-                                conversation and messages may be permanently
-                                removed.
+                                Si les deux participants ont supprimé le même
+                                DM, la conversation et les messages peuvent être
+                                supprimés définitivement.
                             </li>
                             <li>
-                                Group conversations are updated to remove your
-                                account. For events you created, related group
-                                chats are deleted with the event.
+                                Les conversations de groupe sont mises à jour
+                                pour retirer votre compte. Pour les événements
+                                que vous avez créés, les groupes associés sont
+                                supprimés avec l’événement.
                             </li>
                         </ul>
                     </section>
 
                     <section style={styles.section}>
-                        <h2 style={styles.h2}>What may be kept temporarily</h2>
+                        <h2 style={styles.h2}>
+                            Ce qui peut être conservé temporairement
+                        </h2>
                         <p style={styles.p}>
-                            Some limited technical data may remain temporarily
-                            in backups or security logs for legal, fraud
-                            prevention, or technical reasons. This data is not
-                            used to reactivate your account.
+                            Certaines données techniques limitées peuvent rester
+                            temporairement dans des sauvegardes ou des journaux
+                            de sécurité pour des raisons légales, de prévention
+                            de la fraude ou techniques. Ces données ne sont pas
+                            utilisées pour réactiver votre compte.
                         </p>
                     </section>
 
@@ -305,16 +323,19 @@ export default function DeleteAccountPage() {
                         style={{ ...styles.section, borderBottom: "none" }}
                     >
                         <h2 style={styles.h2}>
-                            Need help or cannot access the app?
+                            Besoin d’aide ou impossible d’accéder à l’app ?
                         </h2>
                         <p style={styles.p}>
-                            If you cannot log in and still want your account
-                            deleted, contact support:
+                            Si vous ne pouvez pas vous connecter et souhaitez
+                            quand même supprimer votre compte, contactez le
+                            support :
                         </p>
                         <div style={styles.callout}>
-                            <p style={styles.calloutTitle}>Support contact</p>
+                            <p style={styles.calloutTitle}>
+                                Contact du support
+                            </p>
                             <p style={styles.calloutText}>
-                                Email:{" "}
+                                Email :{" "}
                                 <a
                                     href={`mailto:${contactEmail}`}
                                     style={{
@@ -326,14 +347,14 @@ export default function DeleteAccountPage() {
                                     {contactEmail}
                                 </a>
                                 <br />
-                                You can include your account email / phone
-                                number used in Movenco to help us locate your
-                                account.
+                                Vous pouvez indiquer l’email du compte / le
+                                numéro de téléphone utilisé dans Movenco pour
+                                nous aider à retrouver votre compte.
                             </p>
                         </div>
 
                         <p style={styles.p}>
-                            See also our{" "}
+                            Consultez aussi notre{" "}
                             <Link
                                 href="/privacy"
                                 style={{
@@ -342,9 +363,10 @@ export default function DeleteAccountPage() {
                                     textDecoration: "none",
                                 }}
                             >
-                                Privacy Policy
+                                Politique de confidentialité
                             </Link>{" "}
-                            for details about personal data processing.
+                            pour les détails sur le traitement des données
+                            personnelles.
                         </p>
                     </section>
                 </article>
@@ -353,13 +375,13 @@ export default function DeleteAccountPage() {
                     <div>© {year} Movenco</div>
                     <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
                         <Link href="/" style={styles.link}>
-                            Home
+                            Accueil
                         </Link>
                         <Link href="/privacy" style={styles.link}>
-                            Privacy
+                            Confidentialité
                         </Link>
                         <Link href="/terms" style={styles.link}>
-                            Terms
+                            Conditions
                         </Link>
                     </div>
                 </footer>
