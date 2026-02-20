@@ -6,7 +6,7 @@ import React from "react";
 export const metadata: Metadata = {
     title: "Conditions d’utilisation — Movenco",
     description:
-        "Conditions d’utilisation Movenco : accès, compte, règles, contenus, événements, modération, publicité, suppression de compte, responsabilité, droit applicable, contact.",
+        "Conditions Générales d’Utilisation de Movenco : compte, règles de conduite, géolocalisation, contenus, messagerie, modération, responsabilité, suppression de compte et contact.",
 };
 
 const palette = {
@@ -58,7 +58,6 @@ const styles: Record<string, React.CSSProperties> = {
         flexWrap: "wrap",
         alignItems: "center",
     },
-    link: { color: palette.sub, textDecoration: "none", fontSize: 13 },
     btn: {
         textDecoration: "none",
         padding: "10px 12px",
@@ -190,26 +189,27 @@ const styles: Record<string, React.CSSProperties> = {
 };
 
 export default function TermsPage() {
-    const updatedAt = "11/02/2026";
+    const updatedAt = "20/02/2026";
     const contactEmail = "movencoapp@gmail.com";
     const minAge = 16;
 
     const toc = [
-        { id: "intro", label: "1. Objet" },
-        { id: "access", label: "2. Accès au service" },
-        { id: "account", label: "3. Compte & sécurité" },
-        { id: "minors", label: "4. Âge minimum" },
-        { id: "rules", label: "5. Règles de conduite" },
-        { id: "content", label: "6. Contenus & propriété" },
-        { id: "events", label: "7. Événements & sécurité" },
-        { id: "ads", label: "8. Publicité" },
-        { id: "moderation", label: "9. Modération & signalements" },
-        { id: "termination", label: "10. Résiliation & suppression" },
+        { id: "objet", label: "1. Objet" },
+        { id: "access", label: "2. Conditions d’accès" },
+        { id: "account", label: "3. Compte utilisateur" },
+        { id: "conduct", label: "4. Règles de conduite" },
+        { id: "content", label: "5. Contenus publiés" },
+        { id: "location", label: "6. Géolocalisation" },
+        { id: "moderation", label: "7. Signalement & modération" },
+        { id: "messaging", label: "8. Messagerie" },
+        { id: "availability", label: "9. Disponibilité" },
+        { id: "ip", label: "10. Propriété intellectuelle" },
         { id: "liability", label: "11. Responsabilité" },
-        { id: "third", label: "12. Services tiers" },
-        { id: "changes", label: "13. Modification des CGU" },
-        { id: "law", label: "14. Droit applicable" },
-        { id: "contact", label: "15. Contact" },
+        { id: "safety", label: "12. Sécurité & événements" },
+        { id: "delete", label: "13. Suppression de compte" },
+        { id: "changes", label: "14. Évolution des CGU" },
+        { id: "law", label: "15. Droit applicable" },
+        { id: "contact", label: "16. Contact" },
     ];
 
     return (
@@ -257,9 +257,9 @@ export default function TermsPage() {
                     <div style={styles.heroInner}>
                         <h1 style={styles.title}>Conditions d’utilisation</h1>
                         <p style={styles.subtitle}>
-                            Ces conditions encadrent l’accès et l’usage de
-                            Movenco (site vitrine et application). Elles
-                            complètent la{" "}
+                            Ces Conditions Générales d’Utilisation (CGU)
+                            encadrent l’accès et l’usage de l’application mobile
+                            Movenco. Elles complètent la{" "}
                             <Link
                                 href="/privacy"
                                 style={{
@@ -275,7 +275,9 @@ export default function TermsPage() {
 
                         <div style={styles.metaRow}>
                             <span style={styles.pill}>📜 CGU</span>
-                            <span style={styles.pill}>🛡️ Communauté</span>
+                            <span style={styles.pill}>
+                                🛡️ Communauté sportive
+                            </span>
                             <span style={styles.pill}>
                                 📅 Mise à jour : {updatedAt}
                             </span>
@@ -307,177 +309,235 @@ export default function TermsPage() {
 
                     {/* CONTENT */}
                     <article style={styles.content}>
-                        <section id="intro" style={styles.section}>
+                        <section id="objet" style={styles.section}>
                             <h2 style={styles.h2}>1. Objet</h2>
                             <p style={styles.p}>
-                                Movenco est un service permettant de découvrir
-                                des sportifs autour de soi, d’échanger et
-                                d’organiser des sorties/événements. Les
-                                présentes conditions encadrent l’accès et
-                                l’utilisation du service.
+                                Movenco est une application mobile communautaire
+                                permettant notamment de découvrir des sportifs
+                                autour de soi, consulter et créer des événements
+                                sportifs, discuter avec d’autres utilisateurs et
+                                gérer un profil sportif.
+                            </p>
+                            <p style={styles.p}>
+                                En créant un compte ou en utilisant Movenco, tu
+                                acceptes les présentes CGU.
                             </p>
                         </section>
 
                         <section id="access" style={styles.section}>
-                            <h2 style={styles.h2}>2. Accès au service</h2>
+                            <h2 style={styles.h2}>2. Conditions d’accès</h2>
                             <p style={styles.p}>
-                                L’accès peut nécessiter la création d’un compte
-                                et l’acceptation des présentes conditions.
-                                Certaines fonctionnalités peuvent être déployées
-                                progressivement (beta) et évoluer.
+                                L’utilisation de Movenco nécessite un appareil
+                                compatible, une connexion Internet et, pour
+                                certaines fonctionnalités, la création d’un
+                                compte utilisateur.
+                            </p>
+                            <p style={styles.p}>
+                                Certaines fonctionnalités peuvent évoluer, être
+                                ajoutées ou déployées progressivement.
                             </p>
                         </section>
 
                         <section id="account" style={styles.section}>
-                            <h2 style={styles.h2}>3. Compte & sécurité</h2>
+                            <h2 style={styles.h2}>3. Compte utilisateur</h2>
                             <ul style={styles.ul}>
-                                <li>
-                                    Tu es responsable de la confidentialité de
-                                    tes accès.
-                                </li>
                                 <li>
                                     Tu t’engages à fournir des informations
-                                    exactes et à jour.
+                                    exactes, complètes et à jour.
                                 </li>
                                 <li>
-                                    En cas de suspicion d’accès non autorisé,
-                                    contacte-nous rapidement.
+                                    Tu es responsable de la confidentialité de
+                                    tes identifiants et de l’usage de ton
+                                    compte.
+                                </li>
+                                <li>
+                                    En cas d’accès non autorisé suspecté,
+                                    contacte-nous rapidement afin de sécuriser
+                                    le compte.
                                 </li>
                             </ul>
+                            <div style={styles.callout}>
+                                <p style={styles.calloutTitle}>
+                                    🔐 Bon réflexe sécurité
+                                </p>
+                                <p style={styles.calloutText}>
+                                    Utilise un mot de passe fort et unique, et
+                                    évite de partager tes accès, même avec un
+                                    proche.
+                                </p>
+                            </div>
                         </section>
 
-                        <section id="minors" style={styles.section}>
-                            <h2 style={styles.h2}>4. Âge minimum</h2>
-                            <p style={styles.p}>
-                                Movenco n’est pas destiné aux enfants. Pour
-                                utiliser Movenco, tu dois avoir au minimum{" "}
-                                <strong>{minAge} ans</strong> (ou plus si la
-                                législation de ton pays l’exige).
-                            </p>
-                        </section>
-
-                        <section id="rules" style={styles.section}>
-                            <h2 style={styles.h2}>5. Règles de conduite</h2>
+                        <section id="conduct" style={styles.section}>
+                            <h2 style={styles.h2}>4. Règles de conduite</h2>
                             <p style={styles.p}>
                                 Tu t’engages à utiliser Movenco de manière
-                                respectueuse. Sont notamment interdits :
+                                loyale, respectueuse et conforme à la loi. Sont
+                                notamment interdits :
                             </p>
                             <ul style={styles.ul}>
                                 <li>
-                                    Harcèlement, menaces, incitation à la haine.
+                                    harcèlement, menaces, haine, intimidation ;
                                 </li>
                                 <li>
-                                    Spam, phishing, usurpation d’identité,
-                                    fraude.
+                                    spam, phishing, fraude, usurpation
+                                    d’identité ;
                                 </li>
                                 <li>
-                                    Contenus illégaux ou portant atteinte aux
-                                    droits d’autrui.
+                                    publication de contenus illégaux, trompeurs
+                                    ou portant atteinte aux droits de tiers ;
                                 </li>
                                 <li>
-                                    Tentatives de contournement de la
-                                    modération/sécurité.
+                                    tentative de contourner la sécurité, la
+                                    modération ou le bon fonctionnement de
+                                    l’application.
                                 </li>
                             </ul>
                         </section>
 
                         <section id="content" style={styles.section}>
-                            <h2 style={styles.h2}>6. Contenus & propriété</h2>
+                            <h2 style={styles.h2}>5. Contenus publiés</h2>
                             <p style={styles.p}>
-                                Tu restes propriétaire des contenus que tu
-                                publies (messages, photos, descriptions, etc.).
-                                Pour permettre le fonctionnement du service, tu
-                                accordes à Movenco une licence non exclusive et
-                                mondiale d’hébergement, de reproduction
-                                technique et d’affichage au sein du service,
-                                pour la durée nécessaire à la fourniture du
+                                Tu restes responsable des contenus que tu
+                                publies (profil, images, descriptions, messages,
+                                événements, etc.) et tu garantis disposer des
+                                droits nécessaires.
+                            </p>
+                            <p style={styles.p}>
+                                Pour permettre le fonctionnement de Movenco, tu
+                                accordes une licence non exclusive, mondiale et
+                                gratuite d’hébergement, reproduction technique
+                                et affichage de ces contenus dans le cadre du
                                 service.
                             </p>
-                            <p style={styles.p}>
-                                Les éléments Movenco (marque, design, code,
-                                logos) sont protégés et ne peuvent être
-                                reproduits sans autorisation.
-                            </p>
                         </section>
 
-                        <section id="events" style={styles.section}>
-                            <h2 style={styles.h2}>7. Événements & sécurité</h2>
+                        <section id="location" style={styles.section}>
+                            <h2 style={styles.h2}>6. Géolocalisation</h2>
                             <p style={styles.p}>
-                                Les événements sont organisés par les
-                                utilisateurs. Movenco n’est pas organisateur, ni
-                                un service de secours. Chaque participant est
-                                responsable de sa pratique sportive, de son
-                                niveau, de son matériel et du respect des règles
-                                locales.
-                            </p>
-                            <div style={styles.callout}>
-                                <p style={styles.calloutTitle}>
-                                    🧭 Outdoor : bon réflexe
-                                </p>
-                                <p style={styles.calloutText}>
-                                    Vérifie météo, itinéraire, niveau du groupe,
-                                    équipement, et règles de sécurité. En cas de
-                                    doute, renonce.
-                                </p>
-                            </div>
-                        </section>
-
-                        <section id="ads" style={styles.section}>
-                            <h2 style={styles.h2}>8. Publicité</h2>
-                            <p style={styles.p}>
-                                Movenco peut afficher des publicités. Selon ton
-                                pays et tes choix de consentement, les
-                                publicités peuvent être personnalisées ou non
-                                personnalisées. Les réglages de consentement
-                                peuvent être modifiés dans l’application
-                                (Paramètres de confidentialité).
+                                Certaines fonctionnalités (utilisateurs proches,
+                                événements à proximité) nécessitent l’accès à la
+                                géolocalisation.
                             </p>
                             <p style={styles.p}>
-                                Pour plus d’informations, consulte la{" "}
-                                <Link
-                                    href="/privacy"
-                                    style={{
-                                        color: palette.primary,
-                                        fontWeight: 950,
-                                        textDecoration: "none",
-                                    }}
-                                >
-                                    Politique de confidentialité
-                                </Link>
-                                .
+                                L’activation de la localisation est facultative,
+                                mais le refus peut limiter certaines
+                                fonctionnalités.
                             </p>
                         </section>
 
                         <section id="moderation" style={styles.section}>
                             <h2 style={styles.h2}>
-                                9. Modération & signalements
+                                7. Signalement & modération
                             </h2>
                             <p style={styles.p}>
-                                Nous pouvons modérer des contenus, limiter des
-                                fonctionnalités ou suspendre/supprimer un compte
-                                en cas de violation des règles, abus, fraude, ou
-                                pour protéger la communauté.
+                                Movenco met à disposition des outils de
+                                signalement et de blocage. Nous pouvons examiner
+                                les signalements et prendre des mesures adaptées
+                                (avertissement, restriction, suspension ou
+                                suppression de contenu/compte).
                             </p>
                             <ul style={styles.ul}>
                                 <li>
-                                    Tu peux signaler un contenu ou un
-                                    comportement abusif dans l’app.
+                                    Tu peux bloquer un utilisateur directement
+                                    dans l’app.
                                 </li>
                                 <li>
-                                    En cas d’urgence réelle, contacte les
-                                    services d’urgence (112/15/17/18).
+                                    Tu peux signaler un comportement ou contenu
+                                    abusif.
                                 </li>
                             </ul>
                         </section>
 
-                        <section id="termination" style={styles.section}>
+                        <section id="messaging" style={styles.section}>
+                            <h2 style={styles.h2}>8. Messagerie</h2>
+                            <p style={styles.p}>
+                                La messagerie privée et de groupe est fournie
+                                pour faciliter les échanges entre utilisateurs
+                                autour des activités et événements.
+                            </p>
+                            <p style={styles.p}>
+                                Elle ne doit pas être utilisée pour le spam, le
+                                démarchage non sollicité, le harcèlement ou
+                                toute activité illicite.
+                            </p>
+                        </section>
+
+                        <section id="availability" style={styles.section}>
+                            <h2 style={styles.h2}>9. Disponibilité</h2>
+                            <p style={styles.p}>
+                                Nous faisons de notre mieux pour assurer la
+                                disponibilité du service, mais nous ne
+                                garantissons pas un accès ininterrompu.
+                            </p>
+                            <p style={styles.p}>
+                                L’application peut être temporairement
+                                indisponible (maintenance, évolution, incident
+                                technique, prestataire tiers, etc.).
+                            </p>
+                        </section>
+
+                        <section id="ip" style={styles.section}>
                             <h2 style={styles.h2}>
-                                10. Résiliation & suppression
+                                10. Propriété intellectuelle
                             </h2>
                             <p style={styles.p}>
-                                Tu peux arrêter d’utiliser Movenco à tout
-                                moment. La suppression de compte est disponible
-                                depuis l’application et expliquée sur la page{" "}
+                                Les éléments de Movenco (nom, marque, logo,
+                                design, textes, code, interface, visuels) sont
+                                protégés par les lois sur la propriété
+                                intellectuelle.
+                            </p>
+                            <p style={styles.p}>
+                                Toute reproduction, adaptation ou exploitation
+                                non autorisée est interdite.
+                            </p>
+                        </section>
+
+                        <section id="liability" style={styles.section}>
+                            <h2 style={styles.h2}>11. Responsabilité</h2>
+                            <p style={styles.p}>
+                                Movenco est une plateforme de mise en relation
+                                et d’organisation communautaire. Nous ne sommes
+                                pas responsables des contenus publiés par les
+                                utilisateurs ni de leurs comportements.
+                            </p>
+                            <p style={styles.p}>
+                                Sauf disposition légale impérative contraire,
+                                Movenco ne pourra pas être tenu responsable des
+                                dommages indirects liés à l’utilisation du
+                                service.
+                            </p>
+                        </section>
+
+                        <section id="safety" style={styles.section}>
+                            <h2 style={styles.h2}>
+                                12. Sécurité & événements sportifs
+                            </h2>
+                            <p style={styles.p}>
+                                Les événements et sorties sont organisés par les
+                                utilisateurs. Chaque participant est seul
+                                responsable de sa pratique sportive, de son
+                                matériel, de son niveau et du respect des
+                                consignes de sécurité.
+                            </p>
+                            <div style={styles.callout}>
+                                <p style={styles.calloutTitle}>
+                                    🧭 Conseil sécurité outdoor
+                                </p>
+                                <p style={styles.calloutText}>
+                                    Vérifie météo, itinéraire, niveau du groupe,
+                                    équipement, visibilité, autonomie et
+                                    conditions locales avant toute sortie. En
+                                    cas de doute, renonce.
+                                </p>
+                            </div>
+                        </section>
+
+                        <section id="delete" style={styles.section}>
+                            <h2 style={styles.h2}>13. Suppression de compte</h2>
+                            <p style={styles.p}>
+                                Tu peux supprimer ton compte depuis
+                                l’application ou via la page dédiée :{" "}
                                 <Link
                                     href="/delete-account"
                                     style={{
@@ -490,34 +550,10 @@ export default function TermsPage() {
                                 </Link>
                                 .
                             </p>
-                        </section>
-
-                        <section id="liability" style={styles.section}>
-                            <h2 style={styles.h2}>11. Responsabilité</h2>
                             <p style={styles.p}>
-                                Movenco fournit un service de mise en relation
-                                et d’organisation. Sauf dispositions légales
-                                impératives contraires, Movenco ne peut être
-                                tenu responsable des dommages indirects, ni des
-                                incidents survenus lors d’événements/rencontres
-                                entre utilisateurs.
-                            </p>
-                            <p style={styles.p}>
-                                Le service peut être interrompu temporairement
-                                (maintenance, incidents techniques). Nous
-                                faisons au mieux pour assurer la disponibilité,
-                                sans garantie absolue.
-                            </p>
-                        </section>
-
-                        <section id="third" style={styles.section}>
-                            <h2 style={styles.h2}>12. Services tiers</h2>
-                            <p style={styles.p}>
-                                Certaines fonctionnalités peuvent s’appuyer sur
-                                des services tiers (hébergement, stockage
-                                médias, SMS, publicité…). Ces services peuvent
-                                appliquer leurs propres conditions. Les détails
-                                sont indiqués dans la{" "}
+                                La suppression du compte entraîne la
+                                désactivation de l’accès au service et le
+                                traitement des données selon la{" "}
                                 <Link
                                     href="/privacy"
                                     style={{
@@ -533,20 +569,27 @@ export default function TermsPage() {
                         </section>
 
                         <section id="changes" style={styles.section}>
-                            <h2 style={styles.h2}>13. Modification des CGU</h2>
+                            <h2 style={styles.h2}>14. Évolution des CGU</h2>
                             <p style={styles.p}>
-                                Nous pouvons faire évoluer ces conditions. La
-                                date de mise à jour est indiquée en haut. En
-                                continuant d’utiliser le service après
-                                modification, tu acceptes la version mise à
-                                jour.
+                                Nous pouvons modifier les présentes CGU à tout
+                                moment. La date de mise à jour affichée en haut
+                                de cette page fait foi.
+                            </p>
+                            <p style={styles.p}>
+                                En continuant à utiliser Movenco après une mise
+                                à jour, tu acceptes la version en vigueur.
                             </p>
                         </section>
 
                         <section id="law" style={styles.section}>
-                            <h2 style={styles.h2}>14. Droit applicable</h2>
+                            <h2 style={styles.h2}>15. Droit applicable</h2>
                             <p style={styles.p}>
-                                Ces conditions sont soumises au droit français.
+                                Les présentes CGU sont soumises au droit
+                                français, sous réserve des dispositions
+                                impératives applicables dans ton pays de
+                                résidence.
+                            </p>
+                            <p style={styles.p}>
                                 En cas de litige, une solution amiable sera
                                 recherchée avant toute action judiciaire.
                             </p>
@@ -556,8 +599,20 @@ export default function TermsPage() {
                             id="contact"
                             style={{ ...styles.section, borderBottom: "none" }}
                         >
-                            <h2 style={styles.h2}>15. Contact</h2>
+                            <h2 style={styles.h2}>16. Contact</h2>
                             <p style={styles.p}>
+                                Support :{" "}
+                                <Link
+                                    href="/support"
+                                    style={{
+                                        color: palette.primary,
+                                        fontWeight: 950,
+                                        textDecoration: "none",
+                                    }}
+                                >
+                                    movencoapp.com/support
+                                </Link>
+                                <br />
                                 Email :{" "}
                                 <a
                                     href={`mailto:${contactEmail}`}
@@ -569,6 +624,8 @@ export default function TermsPage() {
                                 >
                                     {contactEmail}
                                 </a>
+                                <br />
+                                Âge minimum recommandé : {minAge} ans
                                 <br />
                                 Dernière mise à jour : {updatedAt}
                             </p>

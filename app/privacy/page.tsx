@@ -5,7 +5,7 @@ import type { CSSProperties } from "react";
 export const metadata: Metadata = {
     title: "Politique de confidentialité — Movenco",
     description:
-        "Politique de confidentialité Movenco : données collectées, finalités, bases légales, conservation, sous-traitants, sécurité, consentement publicitaire et droits RGPD.",
+        "Politique de confidentialité Movenco : données collectées, finalités, bases légales, géolocalisation, messagerie, sécurité, conservation, droits RGPD et suppression de compte.",
 };
 
 const palette = {
@@ -18,7 +18,7 @@ const palette = {
     border: "#e5e7eb",
 };
 
-const styles: Record<string, React.CSSProperties> = {
+const styles: Record<string, CSSProperties> = {
     page: { minHeight: "100vh", background: palette.bg, color: palette.text },
     container: { maxWidth: 980, margin: "0 auto", padding: "22px 18px 54px" },
 
@@ -186,32 +186,6 @@ const styles: Record<string, React.CSSProperties> = {
         lineHeight: 1.6,
     },
 
-    tableWrap: {
-        marginTop: 12,
-        borderRadius: 16,
-        border: `1px solid ${palette.border}`,
-        overflow: "hidden",
-        background: "white",
-    },
-    table: { width: "100%", borderCollapse: "collapse" as const },
-    th: {
-        textAlign: "left" as const,
-        fontSize: 12,
-        color: palette.sub,
-        padding: "10px 12px",
-        background: "rgba(246,247,248,0.9)",
-        borderBottom: `1px solid ${palette.border}`,
-        fontWeight: 900,
-    },
-    td: {
-        verticalAlign: "top" as const,
-        padding: "10px 12px",
-        borderBottom: `1px solid ${palette.border}`,
-        fontSize: 13,
-        color: palette.sub,
-        lineHeight: 1.6,
-    },
-
     footer: {
         marginTop: 18,
         color: palette.sub,
@@ -226,49 +200,24 @@ const styles: Record<string, React.CSSProperties> = {
 
 export default function PrivacyPage() {
     const year = new Date().getFullYear();
-
-    const updatedAt = "11/02/2026";
-
-    /**
-     * ✅ Responsable de traitement (RGPD)
-     * Pour un AE, le “responsable” peut être ton nom.
-     * Si tu crées une société plus tard, remplace ici (raison sociale, adresse).
-     */
-    const controllerName = "Maxence Derepas (Movenco)";
-    const controllerAddress =
-        "France (adresse légale communiquée dans les Mentions légales)";
-
-    const controllerEmail = "movencoapp@gmail.com";
-    const dpoEmail = "movencoapp@gmail.com"; // si pas de DPO dédié, mets ton email
-
-    /**
-     * ✅ Infrastructure (à compléter précisément quand tu figes la prod)
-     * - Site : Vercel (déjà OK)
-     * - API/DB : à préciser (Render/Fly/VPS + Mongo Atlas, etc.)
-     */
-    const websiteHosting = "Vercel Inc. (site web)";
-    const apiHosting =
-        "À préciser : hébergeur de l’API (ex. Render/Fly/VPS) + localisation";
-    const databaseProvider =
-        "À préciser : fournisseur DB (ex. MongoDB Atlas) + localisation";
+    const updatedAt = "20/02/2026";
+    const contactEmail = "movencoapp@gmail.com";
 
     const toc = [
-        { id: "who", label: "1. Responsable & contact" },
-        { id: "scope", label: "2. Portée" },
-        { id: "data", label: "3. Données collectées" },
-        { id: "purposes", label: "4. Finalités" },
-        { id: "legal", label: "5. Bases légales" },
-        { id: "ads", label: "6. Publicité & consentement" },
+        { id: "controller", label: "1. Responsable du traitement" },
+        { id: "data", label: "2. Données collectées" },
+        { id: "purposes", label: "3. Finalités" },
+        { id: "legal-basis", label: "4. Bases légales" },
+        { id: "geo", label: "5. Géolocalisation" },
+        { id: "recipients", label: "6. Destinataires" },
         { id: "retention", label: "7. Conservation" },
-        { id: "recipients", label: "8. Destinataires" },
-        { id: "processors", label: "9. Sous-traitants" },
-        { id: "transfers", label: "10. Transferts hors UE" },
-        { id: "security", label: "11. Sécurité" },
-        { id: "rights", label: "12. Vos droits (RGPD)" },
-        { id: "delete", label: "13. Suppression de compte" },
-        { id: "minors", label: "14. Mineurs" },
-        { id: "cookies", label: "15. Cookies / traceurs" },
-        { id: "contact", label: "16. Contact & CNIL" },
+        { id: "delete", label: "8. Suppression de compte" },
+        { id: "security", label: "9. Sécurité" },
+        { id: "rights", label: "10. Vos droits" },
+        { id: "minors", label: "11. Mineurs" },
+        { id: "external", label: "12. Liens externes" },
+        { id: "changes", label: "13. Modifications" },
+        { id: "contact", label: "14. Contact" },
     ];
 
     return (
@@ -315,15 +264,15 @@ export default function PrivacyPage() {
                             Politique de confidentialité
                         </h1>
                         <p style={styles.subtitle}>
-                            Ce document décrit comment{" "}
-                            <strong>{controllerName}</strong> traite les données
+                            Cette politique explique comment Movenco collecte,
+                            utilise, conserve et protège vos données
                             personnelles dans le cadre de l’utilisation de
-                            Movenco (site vitrine et application).
+                            l’application mobile.
                         </p>
                         <div style={styles.metaRow}>
                             <span style={styles.pill}>🛡️ RGPD</span>
-                            <span style={styles.pill}>📍 Localisation</span>
-                            <span style={styles.pill}>📣 Publicité</span>
+                            <span style={styles.pill}>📍 Géolocalisation</span>
+                            <span style={styles.pill}>💬 Messagerie</span>
                             <span style={styles.pill}>
                                 📅 Mise à jour : {updatedAt}
                             </span>
@@ -352,485 +301,398 @@ export default function PrivacyPage() {
                     </aside>
 
                     <article style={styles.content}>
-                        <section id="who" style={styles.section}>
-                            <h2 style={styles.h2}>1. Responsable & contact</h2>
+                        <section id="controller" style={styles.section}>
+                            <h2 style={styles.h2}>
+                                1. Responsable du traitement
+                            </h2>
                             <p style={styles.p}>
-                                Le responsable de traitement est :{" "}
-                                <strong>{controllerName}</strong>,{" "}
-                                {controllerAddress}.
+                                Le responsable du traitement est l’éditeur de
+                                l’application Movenco.
+                            </p>
+                            <p style={styles.p}>
+                                Pour toute question relative à la protection des
+                                données :
                                 <br />
-                                Email :{" "}
-                                <a
-                                    href={`mailto:${controllerEmail}`}
+                                Support :{" "}
+                                <Link
+                                    href="/support"
                                     style={{
                                         color: palette.primary,
                                         fontWeight: 950,
                                         textDecoration: "none",
                                     }}
                                 >
-                                    {controllerEmail}
+                                    movencoapp.com/support
+                                </Link>
+                                <br />
+                                Email :{" "}
+                                <a
+                                    href={`mailto:${contactEmail}`}
+                                    style={{
+                                        color: palette.primary,
+                                        fontWeight: 950,
+                                        textDecoration: "none",
+                                    }}
+                                >
+                                    {contactEmail}
                                 </a>
-                                .
                             </p>
-                            <div style={styles.callout}>
-                                <p style={styles.calloutTitle}>
-                                    ✅ Transparence “stores”
-                                </p>
-                                <p style={styles.calloutText}>
-                                    Movenco propose des fonctionnalités sociales
-                                    (profil, chat, événements) et peut afficher
-                                    des publicités. Les choix de consentement
-                                    publicitaire peuvent être modifiés dans
-                                    l’application (Paramètres de
-                                    confidentialité).
-                                </p>
-                            </div>
-                        </section>
-
-                        <section id="scope" style={styles.section}>
-                            <h2 style={styles.h2}>2. Portée</h2>
-                            <p style={styles.p}>Cette politique s’applique :</p>
-                            <ul style={styles.ul}>
-                                <li>
-                                    au site vitrine movenco.com (informations
-                                    générales)
-                                </li>
-                                <li>
-                                    à l’application Movenco (fonctionnalités
-                                    sociales)
-                                </li>
-                            </ul>
                         </section>
 
                         <section id="data" style={styles.section}>
-                            <h2 style={styles.h2}>3. Données collectées</h2>
+                            <h2 style={styles.h2}>2. Données collectées</h2>
+                            <p style={styles.p}>
+                                Selon votre utilisation de l’application, nous
+                                pouvons collecter les catégories de données
+                                suivantes :
+                            </p>
                             <ul style={styles.ul}>
                                 <li>
-                                    <strong>Compte & profil</strong> :
-                                    identifiants de connexion (ex. numéro de
-                                    téléphone), nom/pseudo, photo de profil,
-                                    date de naissance (ou âge), genre (si
-                                    renseigné), sports.
+                                    <strong>Données de compte</strong> : nom /
+                                    pseudo, adresse email, identifiants de
+                                    connexion.
                                 </li>
                                 <li>
-                                    <strong>Localisation</strong> : position
-                                    (précise ou approximative) lorsque
-                                    l’utilisateur l’autorise, afin d’afficher
-                                    les utilisateurs et événements autour de
-                                    lui.
+                                    <strong>Données de profil</strong> : photo
+                                    de profil (avatar), date de naissance,
+                                    genre, sports / activités sélectionnés,
+                                    informations de profil que vous choisissez
+                                    de renseigner.
                                 </li>
                                 <li>
-                                    <strong>Contenus</strong> : messages privés,
-                                    conversations de groupe liées aux
-                                    événements, contenus publiés (si activés),
-                                    commentaires, réactions.
+                                    <strong>Données de géolocalisation</strong>{" "}
+                                    : position géographique lorsque vous activez
+                                    la localisation, afin d’afficher des
+                                    utilisateurs et événements à proximité.
                                 </li>
                                 <li>
-                                    <strong>Événements</strong> : événements
-                                    créés ou rejoints, participation,
-                                    informations associées (titre, lieu,
-                                    description…).
-                                </li>
-                                <li>
-                                    <strong>Médias</strong> : photos/avatars
-                                    sélectionnés par l’utilisateur (si ajoutés).
+                                    <strong>
+                                        Données de contenu et interactions
+                                    </strong>{" "}
+                                    : messages privés et de groupe, contenus
+                                    publiés, signalements, blocages,
+                                    interactions liées au compte.
                                 </li>
                                 <li>
                                     <strong>Données techniques</strong> :
-                                    adresse IP, identifiants techniques,
-                                    journaux (sécurité/anti-abus), données de
-                                    diagnostic (crash/performance).
+                                    identifiants techniques de session, token
+                                    d’authentification, langue, journaux
+                                    techniques, informations nécessaires au
+                                    fonctionnement du service.
                                 </li>
                                 <li>
-                                    <strong>Publicité</strong> : informations
-                                    liées au consentement, identifiants
-                                    publicitaires (selon votre choix et les
-                                    réglages du système).
+                                    <strong>
+                                        Données publicitaires (si applicable)
+                                    </strong>{" "}
+                                    : données nécessaires à l’affichage et à la
+                                    mesure des publicités, ainsi qu’à la gestion
+                                    de vos préférences de consentement.
                                 </li>
                             </ul>
-                            <p style={styles.p}>
-                                Les données strictement nécessaires au service
-                                sont requises. Les autres données sont
-                                optionnelles.
-                            </p>
                         </section>
 
                         <section id="purposes" style={styles.section}>
-                            <h2 style={styles.h2}>4. Finalités</h2>
-                            <ul style={styles.ul}>
-                                <li>
-                                    Créer et gérer votre compte utilisateur.
-                                </li>
-                                <li>
-                                    Fournir le service (matching local,
-                                    recherche, chats, groupes, événements).
-                                </li>
-                                <li>
-                                    Sécuriser le service (prévention fraude,
-                                    modération, lutte anti-abus).
-                                </li>
-                                <li>
-                                    Support (réponses aux demandes, assistance).
-                                </li>
-                                <li>
-                                    Amélioration technique (stabilité,
-                                    performance, qualité de service).
-                                </li>
-                                <li>
-                                    Respect d’obligations légales (si
-                                    applicable).
-                                </li>
-                            </ul>
-                        </section>
-
-                        <section id="legal" style={styles.section}>
-                            <h2 style={styles.h2}>5. Bases légales (RGPD)</h2>
-                            <ul style={styles.ul}>
-                                <li>
-                                    <strong>Exécution du contrat</strong> :
-                                    fournir les fonctionnalités essentielles du
-                                    service.
-                                </li>
-                                <li>
-                                    <strong>Consentement</strong> : accès à la
-                                    localisation, notifications, certains
-                                    traceurs et publicités personnalisées (selon
-                                    votre choix).
-                                </li>
-                                <li>
-                                    <strong>Intérêt légitime</strong> :
-                                    sécurité, lutte anti-abus, prévention
-                                    fraude, amélioration du service.
-                                </li>
-                                <li>
-                                    <strong>Obligation légale</strong> : lorsque
-                                    la loi impose une conservation ou une
-                                    communication.
-                                </li>
-                            </ul>
-                        </section>
-
-                        <section id="ads" style={styles.section}>
                             <h2 style={styles.h2}>
-                                6. Publicité & consentement
+                                3. Finalités du traitement
                             </h2>
                             <p style={styles.p}>
-                                Movenco peut afficher des publicités. Selon
-                                votre pays et vos choix, des publicités{" "}
-                                <strong>personnalisées</strong> (basées sur des
-                                intérêts) ou <strong>non personnalisées</strong>{" "}
-                                peuvent être affichées.
+                                Nous utilisons vos données pour :
                             </p>
                             <ul style={styles.ul}>
                                 <li>
-                                    <strong>
-                                        Gestion du consentement (CMP)
-                                    </strong>{" "}
-                                    : vous pouvez accepter/refuser et gérer vos
-                                    options. Dans l’app, accédez à{" "}
-                                    <strong>
-                                        Profil → Paramètres de confidentialité
-                                    </strong>
-                                    .
+                                    créer et gérer votre compte utilisateur ;
                                 </li>
                                 <li>
-                                    <strong>iOS (ATT)</strong> : si nécessaire,
-                                    l’autorisation “Suivi” (App Tracking
-                                    Transparency) peut être demandée. En cas de
-                                    refus, Movenco limite le suivi publicitaire.
+                                    vous authentifier et sécuriser l’accès au
+                                    service ;
                                 </li>
                                 <li>
-                                    <strong>Android (AD_ID)</strong> :
-                                    l’identifiant publicitaire Android peut être
-                                    utilisé selon vos réglages et votre
-                                    consentement.
+                                    afficher votre profil et vos préférences
+                                    sportives ;
                                 </li>
                                 <li>
-                                    <strong>Localisation et publicité</strong> :
-                                    la localisation est utilisée principalement
-                                    pour les fonctionnalités “Autour de moi”. Si
-                                    des partenaires publicitaires utilisent des
-                                    signaux de localisation, cela dépend de
-                                    votre consentement et des paramètres CMP.
+                                    permettre la géolocalisation des
+                                    utilisateurs et événements à proximité ;
+                                </li>
+                                <li>
+                                    fournir la messagerie et les échanges entre
+                                    utilisateurs ;
+                                </li>
+                                <li>
+                                    modérer la plateforme (signalements,
+                                    blocages, sécurité) ;
+                                </li>
+                                <li>
+                                    améliorer les performances et l’expérience
+                                    utilisateur ;
+                                </li>
+                                <li>respecter nos obligations légales ;</li>
+                                <li>
+                                    prévenir les abus, fraudes et incidents de
+                                    sécurité.
                                 </li>
                             </ul>
-
-                            <div style={styles.callout}>
-                                <p style={styles.calloutTitle}>
-                                    ✅ Conseil (simplicité & conformité)
-                                </p>
-                                <p style={styles.calloutText}>
-                                    Si tu veux éviter toute ambiguïté, tu peux
-                                    configurer tes pubs en “non personnalisées”
-                                    par défaut, et n’activer la personnalisation
-                                    qu’après consentement explicite.
-                                </p>
-                            </div>
                         </section>
 
-                        <section id="retention" style={styles.section}>
-                            <h2 style={styles.h2}>7. Durées de conservation</h2>
+                        <section id="legal-basis" style={styles.section}>
+                            <h2 style={styles.h2}>4. Bases légales (RGPD)</h2>
                             <p style={styles.p}>
-                                Les données sont conservées pour la durée
-                                nécessaire aux finalités, puis supprimées ou
-                                anonymisées. Exemple de grille indicative (à
-                                aligner avec ton fonctionnement réel) :
+                                Les traitements reposent, selon les cas, sur :
                             </p>
+                            <ul style={styles.ul}>
+                                <li>
+                                    <strong>l’exécution du contrat</strong> :
+                                    fourniture des fonctionnalités de
+                                    l’application ;
+                                </li>
+                                <li>
+                                    <strong>votre consentement</strong> :
+                                    notamment pour la géolocalisation et, le cas
+                                    échéant, certaines technologies
+                                    publicitaires ;
+                                </li>
+                                <li>
+                                    <strong>notre intérêt légitime</strong> :
+                                    sécurité, lutte contre les abus,
+                                    amélioration du service ;
+                                </li>
+                                <li>
+                                    <strong>nos obligations légales</strong> :
+                                    conservation ou communication de données
+                                    lorsque la loi l’exige.
+                                </li>
+                            </ul>
+                        </section>
 
-                            <div style={styles.tableWrap}>
-                                <table style={styles.table}>
-                                    <thead>
-                                        <tr>
-                                            <th style={styles.th}>Catégorie</th>
-                                            <th style={styles.th}>
-                                                Durée indicative
-                                            </th>
-                                            <th style={styles.th}>Détail</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td style={styles.td}>
-                                                <strong>
-                                                    Données de compte
-                                                </strong>
-                                            </td>
-                                            <td style={styles.td}>
-                                                Durée du compte + 30 jours
-                                            </td>
-                                            <td style={styles.td}>
-                                                Après suppression, une purge
-                                                différée peut exister pour
-                                                sécurité et restauration.
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style={styles.td}>
-                                                <strong>
-                                                    Messages & contenus
-                                                </strong>
-                                            </td>
-                                            <td style={styles.td}>
-                                                Durée du compte (ou
-                                                anonymisation)
-                                            </td>
-                                            <td style={styles.td}>
-                                                Selon les fonctionnalités :
-                                                suppression, anonymisation, ou
-                                                conservation limitée pour
-                                                modération/sécurité.
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style={styles.td}>
-                                                <strong>Localisation</strong>
-                                            </td>
-                                            <td style={styles.td}>
-                                                Temps nécessaire
-                                            </td>
-                                            <td style={styles.td}>
-                                                Principalement en temps réel ;
-                                                stockage limité à ce qui est
-                                                nécessaire au service.
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style={styles.td}>
-                                                <strong>Logs sécurité</strong>
-                                            </td>
-                                            <td style={styles.td}>
-                                                6 à 12 mois
-                                            </td>
-                                            <td style={styles.td}>
-                                                Prévention fraude, anti-abus et
-                                                sécurité.
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style={styles.td}>
-                                                <strong>Support</strong>
-                                            </td>
-                                            <td style={styles.td}>
-                                                12 à 24 mois
-                                            </td>
-                                            <td style={styles.td}>
-                                                Historique des échanges pour
-                                                suivi.
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style={styles.td}>
-                                                <strong>
-                                                    Consentement pub
-                                                </strong>
-                                            </td>
-                                            <td style={styles.td}>
-                                                Selon exigence réglementaire
-                                            </td>
-                                            <td style={styles.td}>
-                                                Conservation de la preuve de
-                                                consentement lorsque requis.
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                        <section id="geo" style={styles.section}>
+                            <h2 style={styles.h2}>5. Géolocalisation</h2>
+                            <p style={styles.p}>
+                                La géolocalisation est utilisée pour proposer
+                                les fonctionnalités de proximité de Movenco.
+                            </p>
+                            <ul style={styles.ul}>
+                                <li>
+                                    Vous pouvez refuser ou retirer
+                                    l’autorisation depuis les réglages de votre
+                                    téléphone.
+                                </li>
+                                <li>
+                                    Certaines fonctionnalités peuvent alors être
+                                    limitées.
+                                </li>
+                                <li>
+                                    Votre position exacte n’a pas vocation à
+                                    être affichée publiquement telle quelle.
+                                </li>
+                            </ul>
                         </section>
 
                         <section id="recipients" style={styles.section}>
-                            <h2 style={styles.h2}>8. Destinataires</h2>
+                            <h2 style={styles.h2}>
+                                6. Destinataires des données
+                            </h2>
                             <p style={styles.p}>
-                                Les données sont accessibles uniquement aux
-                                personnes habilitées (Movenco) et, si
-                                nécessaire, aux prestataires techniques
-                                (sous-traitants) dans la limite de leurs
-                                missions.
-                            </p>
-                        </section>
-
-                        <section id="processors" style={styles.section}>
-                            <h2 style={styles.h2}>9. Sous-traitants</h2>
-                            <p style={styles.p}>
-                                Exemples de prestataires pouvant intervenir
-                                (selon tes choix techniques) :
+                                Vos données peuvent être accessibles :
                             </p>
                             <ul style={styles.ul}>
+                                <li>aux équipes habilitées de Movenco ;</li>
                                 <li>
-                                    <strong>Hébergement du site</strong> :{" "}
-                                    {websiteHosting}.
+                                    à nos prestataires techniques (hébergement,
+                                    infrastructure, cloud, analytics,
+                                    messagerie, publicité le cas échéant) ;
                                 </li>
                                 <li>
-                                    <strong>Hébergement API</strong> :{" "}
-                                    {apiHosting}.
-                                </li>
-                                <li>
-                                    <strong>Base de données</strong> :{" "}
-                                    {databaseProvider}.
-                                </li>
-                                <li>
-                                    <strong>Stockage médias</strong> :
-                                    Cloudinary (si utilisé).
-                                </li>
-                                <li>
-                                    <strong>Vérification SMS</strong> : Sinch
-                                    (si utilisé).
-                                </li>
-                                <li>
-                                    <strong>Publicité</strong> : Google AdMob /
-                                    Google (si activé).
+                                    aux autorités compétentes si la loi l’exige.
                                 </li>
                             </ul>
                             <p style={styles.p}>
-                                Chaque sous-traitant est tenu contractuellement
-                                à des obligations de confidentialité et de
-                                sécurité.
+                                Nous ne vendons pas vos données personnelles à
+                                des tiers.
                             </p>
                         </section>
 
-                        <section id="transfers" style={styles.section}>
-                            <h2 style={styles.h2}>10. Transferts hors UE</h2>
+                        <section id="retention" style={styles.section}>
+                            <h2 style={styles.h2}>7. Durée de conservation</h2>
                             <p style={styles.p}>
-                                Certains prestataires peuvent traiter des
-                                données en dehors de l’Union Européenne (ex.
-                                USA). Dans ce cas, des garanties appropriées
-                                sont mises en place (par exemple, clauses
-                                contractuelles types) conformément au RGPD.
+                                Nous conservons vos données pendant la durée
+                                nécessaire aux finalités décrites dans cette
+                                politique, notamment :
                             </p>
-                        </section>
-
-                        <section id="security" style={styles.section}>
-                            <h2 style={styles.h2}>11. Sécurité</h2>
                             <ul style={styles.ul}>
-                                <li>Chiffrement en transit (HTTPS/TLS).</li>
-                                <li>Contrôles d’accès et authentification.</li>
                                 <li>
-                                    Journalisation et protections anti-abus.
+                                    <strong>données de compte</strong> : pendant
+                                    la durée de vie du compte ;
                                 </li>
-                                <li>Minimisation des données.</li>
+                                <li>
+                                    <strong>données de profil</strong> : jusqu’à
+                                    suppression ou modification par
+                                    l’utilisateur ;
+                                </li>
+                                <li>
+                                    <strong>
+                                        données de messagerie / interactions
+                                    </strong>{" "}
+                                    : pendant une durée nécessaire au service, à
+                                    la sécurité et à la modération ;
+                                </li>
+                                <li>
+                                    <strong>
+                                        données de signalement / sécurité
+                                    </strong>{" "}
+                                    : aussi longtemps que nécessaire pour
+                                    traiter les incidents et respecter nos
+                                    obligations ;
+                                </li>
+                                <li>
+                                    <strong>données techniques / logs</strong> :
+                                    durée limitée et proportionnée.
+                                </li>
                             </ul>
+                            <p style={styles.p}>
+                                En cas de suppression du compte, les données
+                                sont supprimées ou anonymisées, sous réserve des
+                                obligations légales et des nécessités de
+                                sécurité, de preuve ou de lutte contre la
+                                fraude.
+                            </p>
                         </section>
 
-                        <section id="rights" style={styles.section}>
-                            <h2 style={styles.h2}>12. Vos droits (RGPD)</h2>
+                        <section id="delete" style={styles.section}>
+                            <h2 style={styles.h2}>8. Suppression de compte</h2>
                             <p style={styles.p}>
-                                Vous disposez des droits : accès, rectification,
-                                suppression, opposition, limitation,
-                                portabilité, et retrait du consentement
-                                (lorsqu’il s’applique).
+                                Vous pouvez demander la suppression de votre
+                                compte :
                             </p>
-                            <div style={styles.callout}>
-                                <p style={styles.calloutTitle}>
-                                    📩 Exercer vos droits
-                                </p>
-                                <p style={styles.calloutText}>
-                                    Email :{" "}
-                                    <a
-                                        href={`mailto:${dpoEmail}`}
+                            <ul style={styles.ul}>
+                                <li>directement depuis l’application ;</li>
+                                <li>
+                                    via la page dédiée :{" "}
+                                    <Link
+                                        href="/delete-account"
                                         style={{
                                             color: palette.primary,
                                             fontWeight: 950,
                                             textDecoration: "none",
                                         }}
                                     >
-                                        {dpoEmail}
-                                    </a>
-                                    . Nous pouvons demander une preuve
-                                    d’identité en cas de doute raisonnable.
-                                </p>
-                            </div>
+                                        Suppression de compte
+                                    </Link>
+                                    .
+                                </li>
+                            </ul>
+                            <p style={styles.p}>
+                                La suppression entraîne la désactivation de
+                                votre accès et la suppression/anonymisation
+                                progressive des données selon les contraintes
+                                légales et techniques applicables.
+                            </p>
                         </section>
 
-                        <section id="delete" style={styles.section}>
-                            <h2 style={styles.h2}>13. Suppression de compte</h2>
+                        <section id="security" style={styles.section}>
+                            <h2 style={styles.h2}>9. Sécurité des données</h2>
                             <p style={styles.p}>
-                                Vous pouvez supprimer votre compte depuis
-                                l’application. Les étapes sont décrites sur la
-                                page{" "}
-                                <Link
-                                    href="/delete-account"
-                                    style={{
-                                        color: palette.primary,
-                                        fontWeight: 950,
-                                        textDecoration: "none",
-                                    }}
-                                >
-                                    Suppression de compte
-                                </Link>
-                                .
+                                Nous mettons en place des mesures techniques et
+                                organisationnelles raisonnables pour protéger
+                                vos données contre l’accès non autorisé, la
+                                perte, la divulgation ou l’altération.
                             </p>
+                            <ul style={styles.ul}>
+                                <li>chiffrement des échanges (HTTPS/TLS) ;</li>
+                                <li>contrôles d’accès ;</li>
+                                <li>mesures de sécurité applicatives ;</li>
+                                <li>journalisation et prévention des abus.</li>
+                            </ul>
+                            <p style={styles.p}>
+                                Aucun système n’étant totalement inviolable,
+                                nous vous recommandons d’utiliser un mot de
+                                passe fort et de ne pas partager vos
+                                identifiants.
+                            </p>
+                        </section>
+
+                        <section id="rights" style={styles.section}>
+                            <h2 style={styles.h2}>10. Vos droits</h2>
+                            <p style={styles.p}>
+                                Conformément au RGPD et aux lois applicables,
+                                vous disposez notamment des droits suivants :
+                            </p>
+                            <ul style={styles.ul}>
+                                <li>droit d’accès ;</li>
+                                <li>droit de rectification ;</li>
+                                <li>droit d’effacement ;</li>
+                                <li>droit d’opposition ;</li>
+                                <li>droit à la limitation du traitement ;</li>
+                                <li>
+                                    droit à la portabilité (dans les cas prévus
+                                    par la loi) ;
+                                </li>
+                                <li>
+                                    droit de retirer votre consentement à tout
+                                    moment (pour les traitements fondés sur le
+                                    consentement).
+                                </li>
+                            </ul>
+                            <div style={styles.callout}>
+                                <p style={styles.calloutTitle}>
+                                    📩 Exercer vos droits
+                                </p>
+                                <p style={styles.calloutText}>
+                                    Contactez-nous via{" "}
+                                    <a
+                                        href={`mailto:${contactEmail}`}
+                                        style={{
+                                            color: palette.primary,
+                                            fontWeight: 950,
+                                            textDecoration: "none",
+                                        }}
+                                    >
+                                        {contactEmail}
+                                    </a>{" "}
+                                    ou via la page support. Nous pourrons
+                                    demander une preuve d’identité en cas de
+                                    doute raisonnable.
+                                </p>
+                            </div>
                         </section>
 
                         <section id="minors" style={styles.section}>
-                            <h2 style={styles.h2}>14. Mineurs</h2>
+                            <h2 style={styles.h2}>11. Mineurs</h2>
                             <p style={styles.p}>
-                                Movenco n’est pas destiné aux enfants. L’accès
-                                au service est recommandé à partir de{" "}
-                                <strong>16 ans</strong> (ou plus, selon le
-                                contexte et la législation applicable). Si vous
-                                êtes parent et pensez qu’un mineur nous a
-                                transmis des données, contactez-nous.
+                                L’application n’est pas destinée à une
+                                utilisation contraire aux règles d’âge
+                                applicables dans votre pays.
                             </p>
-                            <div style={styles.callout}>
-                                <p style={styles.calloutTitle}>
-                                    ✅ Store-friendly
-                                </p>
-                                <p style={styles.calloutText}>
-                                    16+ est souvent un bon compromis pour une
-                                    app sociale avec géoloc + chat. Si tu veux
-                                    “zéro risque”, tu peux passer à 18+ (mais ça
-                                    réduit le marché).
-                                </p>
-                            </div>
+                            <p style={styles.p}>
+                                Si vous pensez qu’un mineur nous a transmis des
+                                données personnelles de manière inappropriée,
+                                contactez-nous afin que nous puissions examiner
+                                la situation.
+                            </p>
                         </section>
 
-                        <section id="cookies" style={styles.section}>
-                            <h2 style={styles.h2}>15. Cookies / traceurs</h2>
+                        <section id="external" style={styles.section}>
+                            <h2 style={styles.h2}>12. Liens externes</h2>
                             <p style={styles.p}>
-                                Sur le site vitrine, nous utilisons soit aucun
-                                traceur, soit uniquement des cookies strictement
-                                nécessaires. Si des outils de mesure
-                                d’audience/marketing sont ajoutés, un bandeau de
-                                consentement sera mis en place.
+                                L’application peut contenir des liens vers des
+                                sites tiers (support, pages légales, etc.). Nous
+                                ne sommes pas responsables des pratiques de
+                                confidentialité de ces sites tiers.
+                            </p>
+                        </section>
+
+                        <section id="changes" style={styles.section}>
+                            <h2 style={styles.h2}>
+                                13. Modifications de la politique
+                            </h2>
+                            <p style={styles.p}>
+                                Nous pouvons mettre à jour la présente Politique
+                                de confidentialité à tout moment.
+                            </p>
+                            <p style={styles.p}>
+                                En cas de modification importante, nous pourrons
+                                vous en informer par un moyen approprié. La date
+                                de mise à jour affichée en haut de cette page
+                                fait foi.
                             </p>
                         </section>
 
@@ -838,23 +700,35 @@ export default function PrivacyPage() {
                             id="contact"
                             style={{ ...styles.section, borderBottom: "none" }}
                         >
-                            <h2 style={styles.h2}>16. Contact & CNIL</h2>
+                            <h2 style={styles.h2}>14. Contact</h2>
                             <p style={styles.p}>
-                                Email :{" "}
-                                <a
-                                    href={`mailto:${controllerEmail}`}
+                                Support :{" "}
+                                <Link
+                                    href="/support"
                                     style={{
                                         color: palette.primary,
                                         fontWeight: 950,
                                         textDecoration: "none",
                                     }}
                                 >
-                                    {controllerEmail}
+                                    movencoapp.com/support
+                                </Link>
+                                <br />
+                                Email :{" "}
+                                <a
+                                    href={`mailto:${contactEmail}`}
+                                    style={{
+                                        color: palette.primary,
+                                        fontWeight: 950,
+                                        textDecoration: "none",
+                                    }}
+                                >
+                                    {contactEmail}
                                 </a>
                                 <br />
-                                Si vous estimez, après nous avoir contactés, que
-                                vos droits ne sont pas respectés, vous pouvez
-                                déposer une réclamation auprès de la CNIL.
+                                Vous pouvez également introduire une réclamation
+                                auprès de la CNIL si vous estimez que vos droits
+                                ne sont pas respectés.
                                 <br />
                                 Dernière mise à jour : {updatedAt}
                             </p>
