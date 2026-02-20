@@ -205,17 +205,6 @@ const styles: Record<string, CSSProperties> = {
             "linear-gradient(180deg, rgba(0,0,0,0.05) 30%, rgba(0,0,0,0.38) 100%)",
         pointerEvents: "none",
     },
-    heroVisualText: {
-        position: "absolute",
-        left: 12,
-        right: 12,
-        bottom: 12,
-        color: "white",
-        fontWeight: 900,
-        fontSize: 13,
-        lineHeight: 1.4,
-        textShadow: "0 6px 18px rgba(0,0,0,0.35)",
-    },
 
     section: { marginTop: 18 },
     sectionTitle: {
@@ -257,42 +246,6 @@ const styles: Record<string, CSSProperties> = {
         lineHeight: 1.6,
     },
 
-    ctaStrip: {
-        marginTop: 18,
-        borderRadius: 18,
-        border: `1px solid ${palette.border}`,
-        background: `linear-gradient(135deg, ${palette.primary}, ${palette.primary2})`,
-        color: "white",
-        boxShadow: "0 14px 40px rgba(43,106,92,0.22)",
-    },
-    ctaStripInner: {
-        padding: "14px 16px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        gap: 12,
-        flexWrap: "wrap",
-    },
-    ctaStripTitle: {
-        margin: 0,
-        fontSize: 15,
-        fontWeight: 950,
-        letterSpacing: -0.2,
-    },
-    ctaStripText: {
-        margin: "6px 0 0",
-        fontSize: 13,
-        opacity: 0.92,
-        lineHeight: 1.5,
-        maxWidth: 620,
-    },
-    ctaStripBtns: {
-        display: "flex",
-        gap: 10,
-        flexWrap: "wrap",
-        alignItems: "center",
-    },
-
     footer: {
         marginTop: 20,
         paddingTop: 10,
@@ -327,8 +280,19 @@ export default function HomePage() {
             <div style={styles.container}>
                 <header style={styles.nav}>
                     <div style={styles.brand}>
-                        <div style={styles.logo}>M</div>
-                        <div style={styles.brandName}>Movenco</div>
+                        <Image
+                            src="/logo-movenco.png" // ou /logo-movenco.png
+                            alt="Movenco"
+                            width={140}
+                            height={40}
+                            priority
+                            style={{
+                                height: "40px",
+                                width: "auto",
+                                display: "block",
+                                objectFit: "contain",
+                            }}
+                        />
                     </div>
 
                     <nav
@@ -409,15 +373,13 @@ export default function HomePage() {
                                     className="badgeLink"
                                     aria-label="Télécharger sur l’App Store"
                                 >
-                                    <Image
+                                    <img
                                         src="/badge-app-store-fr.svg"
                                         alt="Télécharger dans l’App Store"
-                                        width={170}
-                                        height={56}
                                         style={{
-                                            height: "auto",
+                                            height: 56,
                                             width: "auto",
-                                            maxWidth: "170px",
+                                            display: "block",
                                         }}
                                     />
                                 </a>
@@ -446,7 +408,7 @@ export default function HomePage() {
 
                         <div style={styles.heroVisual}>
                             <Image
-                                src="/hero-1.jpg"
+                                src="/features-v2.jpg"
                                 alt="Sport outdoor"
                                 fill
                                 priority
@@ -454,10 +416,6 @@ export default function HomePage() {
                                 style={{ objectFit: "cover" }}
                             />
                             <div style={styles.heroVisualOverlay} />
-                            <div style={styles.heroVisualText}>
-                                Une app conçue pour passer de la découverte à la
-                                sortie, sans friction.
-                            </div>
                         </div>
                     </div>
                 </section>
@@ -494,60 +452,6 @@ export default function HomePage() {
                                 Messagerie privée et discussions de groupe liées
                                 aux événements.
                             </p>
-                        </div>
-                    </div>
-                </section>
-
-                <section style={styles.ctaStrip}>
-                    <div style={styles.ctaStripInner}>
-                        <div>
-                            <p style={styles.ctaStripTitle}>Movenco</p>
-                            <p style={styles.ctaStripText}>
-                                Télécharge l’application sur ton store et
-                                retrouve des sportifs près de chez toi.
-                            </p>
-                        </div>
-
-                        <div style={styles.ctaStripBtns}>
-                            <a
-                                href={APP_STORE_URL}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="badgeLink"
-                                aria-label="Télécharger sur l’App Store"
-                            >
-                                <Image
-                                    src="/badge-app-store-fr.svg"
-                                    alt="Télécharger dans l’App Store"
-                                    width={150}
-                                    height={50}
-                                    style={{
-                                        height: "auto",
-                                        width: "auto",
-                                        maxWidth: "150px",
-                                    }}
-                                />
-                            </a>
-
-                            <a
-                                href={GOOGLE_PLAY_URL}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="badgeLink"
-                                aria-label="Disponible sur Google Play"
-                            >
-                                <Image
-                                    src="/badge-google-play-fr.svg"
-                                    alt="Disponible sur Google Play"
-                                    width={168}
-                                    height={50}
-                                    style={{
-                                        height: "auto",
-                                        width: "auto",
-                                        maxWidth: "168px",
-                                    }}
-                                />
-                            </a>
                         </div>
                     </div>
                 </section>
@@ -662,20 +566,21 @@ export default function HomePage() {
             border-color: rgba(43,106,92,0.20);
           }
 
+          .badgeLink {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 10px;
+            transition: transform 160ms ease, opacity 160ms ease;
+          }
+          .badgeLink:hover {
+            transform: translateY(-1px);
+            opacity: 0.96;
+          }
+
           @media (max-width: 900px) {
             .heroGrid { grid-template-columns: 1fr !important; }
             .grid3 { grid-template-columns: 1fr !important; }
           }
-            .badgeLink {
-  display: inline-flex;
-  align-items: center;
-  border-radius: 10px;
-  transition: transform 160ms ease, opacity 160ms ease;
-}
-.badgeLink:hover {
-  transform: translateY(-1px);
-  opacity: 0.96;
-}
         `}</style>
             </div>
         </main>
