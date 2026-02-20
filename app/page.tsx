@@ -189,43 +189,6 @@ const styles: Record<string, CSSProperties> = {
         flexWrap: "wrap",
         marginTop: 14,
     },
-    storeBtn: {
-        display: "inline-flex",
-        alignItems: "center",
-        gap: 10,
-        textDecoration: "none",
-        padding: "10px 12px",
-        borderRadius: 14,
-        border: `1px solid ${palette.border}`,
-        background: "white",
-        color: palette.text,
-        boxShadow: "0 8px 24px rgba(15,23,42,0.05)",
-    },
-    storeIcon: {
-        width: 34,
-        height: 34,
-        borderRadius: 10,
-        border: `1px solid ${palette.border}`,
-        background: "#f8fafc",
-        display: "grid",
-        placeItems: "center",
-        fontSize: 16,
-        fontWeight: 900,
-    },
-    storeSmall: {
-        margin: 0,
-        color: palette.sub,
-        fontSize: 10,
-        fontWeight: 800,
-        lineHeight: 1.1,
-    },
-    storeBig: {
-        margin: "2px 0 0",
-        color: palette.text,
-        fontSize: 13,
-        fontWeight: 950,
-        lineHeight: 1.1,
-    },
 
     heroVisual: {
         borderRadius: 18,
@@ -323,26 +286,11 @@ const styles: Record<string, CSSProperties> = {
         lineHeight: 1.5,
         maxWidth: 620,
     },
-    ctaStripBtns: { display: "flex", gap: 10, flexWrap: "wrap" },
-    ctaLight: {
-        textDecoration: "none",
-        padding: "10px 12px",
-        borderRadius: 999,
-        background: "white",
-        color: palette.text,
-        fontWeight: 900,
-        fontSize: 13,
-        border: "1px solid rgba(255,255,255,0.25)",
-    },
-    ctaGhost: {
-        textDecoration: "none",
-        padding: "10px 12px",
-        borderRadius: 999,
-        background: "rgba(255,255,255,0.10)",
-        color: "white",
-        fontWeight: 900,
-        fontSize: 13,
-        border: "1px solid rgba(255,255,255,0.22)",
+    ctaStripBtns: {
+        display: "flex",
+        gap: 10,
+        flexWrap: "wrap",
+        alignItems: "center",
     },
 
     footer: {
@@ -458,36 +406,40 @@ export default function HomePage() {
                                     href={APP_STORE_URL}
                                     target="_blank"
                                     rel="noreferrer"
-                                    style={styles.storeBtn}
-                                    className="btnHover"
+                                    className="badgeLink"
                                     aria-label="Télécharger sur l’App Store"
                                 >
-                                    <span style={styles.storeIcon}></span>
-                                    <span>
-                                        <p style={styles.storeSmall}>
-                                            Télécharger sur
-                                        </p>
-                                        <p style={styles.storeBig}>App Store</p>
-                                    </span>
+                                    <Image
+                                        src="/badge-app-store-fr.svg"
+                                        alt="Télécharger dans l’App Store"
+                                        width={170}
+                                        height={56}
+                                        style={{
+                                            height: "auto",
+                                            width: "auto",
+                                            maxWidth: "170px",
+                                        }}
+                                    />
                                 </a>
 
                                 <a
                                     href={GOOGLE_PLAY_URL}
                                     target="_blank"
                                     rel="noreferrer"
-                                    style={styles.storeBtn}
-                                    className="btnHover"
+                                    className="badgeLink"
                                     aria-label="Disponible sur Google Play"
                                 >
-                                    <span style={styles.storeIcon}>▶</span>
-                                    <span>
-                                        <p style={styles.storeSmall}>
-                                            Disponible sur
-                                        </p>
-                                        <p style={styles.storeBig}>
-                                            Google Play
-                                        </p>
-                                    </span>
+                                    <Image
+                                        src="/badge-google-play-fr.svg"
+                                        alt="Disponible sur Google Play"
+                                        width={188}
+                                        height={56}
+                                        style={{
+                                            height: "auto",
+                                            width: "auto",
+                                            maxWidth: "188px",
+                                        }}
+                                    />
                                 </a>
                             </div>
                         </div>
@@ -561,19 +513,40 @@ export default function HomePage() {
                                 href={APP_STORE_URL}
                                 target="_blank"
                                 rel="noreferrer"
-                                style={styles.ctaLight}
-                                className="btnHover"
+                                className="badgeLink"
+                                aria-label="Télécharger sur l’App Store"
                             >
-                                 App Store
+                                <Image
+                                    src="/badge-app-store-fr.svg"
+                                    alt="Télécharger dans l’App Store"
+                                    width={150}
+                                    height={50}
+                                    style={{
+                                        height: "auto",
+                                        width: "auto",
+                                        maxWidth: "150px",
+                                    }}
+                                />
                             </a>
+
                             <a
                                 href={GOOGLE_PLAY_URL}
                                 target="_blank"
                                 rel="noreferrer"
-                                style={styles.ctaGhost}
-                                className="btnHover"
+                                className="badgeLink"
+                                aria-label="Disponible sur Google Play"
                             >
-                                ▶ Google Play
+                                <Image
+                                    src="/badge-google-play-fr.svg"
+                                    alt="Disponible sur Google Play"
+                                    width={168}
+                                    height={50}
+                                    style={{
+                                        height: "auto",
+                                        width: "auto",
+                                        maxWidth: "168px",
+                                    }}
+                                />
                             </a>
                         </div>
                     </div>
@@ -693,6 +666,16 @@ export default function HomePage() {
             .heroGrid { grid-template-columns: 1fr !important; }
             .grid3 { grid-template-columns: 1fr !important; }
           }
+            .badgeLink {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 10px;
+  transition: transform 160ms ease, opacity 160ms ease;
+}
+.badgeLink:hover {
+  transform: translateY(-1px);
+  opacity: 0.96;
+}
         `}</style>
             </div>
         </main>
