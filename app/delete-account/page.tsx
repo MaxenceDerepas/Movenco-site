@@ -1,219 +1,386 @@
-import type { Metadata } from "next";
 import Link from "next/link";
-import React from "react";
+import type { Metadata } from "next";
+import type { CSSProperties } from "react";
 
 export const metadata: Metadata = {
-    title: "Suppression de compte | Movenco",
+    title: "Delete Account — Movenco",
     description:
-        "Comment supprimer votre compte Movenco et quelles données sont supprimées.",
-    robots: { index: true, follow: true },
+        "How to delete your Movenco account and what happens to your data.",
 };
 
-const SUPPORT_EMAIL = "movencoapp@gmail.com";
+const palette = {
+    primary: "#2b6a5c",
+    primary2: "#1f4f45",
+    bg: "#f6f7f8",
+    text: "#0f172a",
+    sub: "#64748b",
+    border: "#e5e7eb",
+};
 
-// ✅ Ajuste si besoin selon ton app
-const INAPP_PATH_FR = "Profil → Paramètres → Supprimer mon compte";
-const INAPP_PATH_EN = "Profile → Settings → Delete my account";
+const styles: Record<string, CSSProperties> = {
+    page: { minHeight: "100vh", background: palette.bg, color: palette.text },
+    container: { maxWidth: 900, margin: "0 auto", padding: "22px 18px 54px" },
 
-// ✅ Cadre clair (recommandé)
-const DELETION_EFFECT = "immédiate (désactivation du compte)";
-const FULL_PURGE_MAX_DAYS = 30;
+    nav: {
+        position: "sticky",
+        top: 0,
+        zIndex: 50,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        gap: 12,
+        flexWrap: "wrap",
+        padding: "12px 4px",
+        background: "rgba(246,247,248,0.72)",
+        backdropFilter: "blur(12px)",
+        borderBottom: "1px solid rgba(229,231,235,0.9)",
+    },
+    brand: { display: "flex", alignItems: "center", gap: 10 },
+    logo: {
+        width: 40,
+        height: 40,
+        borderRadius: 12,
+        background: `linear-gradient(135deg, ${palette.primary}, ${palette.primary2})`,
+        boxShadow: "0 12px 35px rgba(0,0,0,0.14)",
+        display: "grid",
+        placeItems: "center",
+        color: "white",
+        fontWeight: 950,
+        letterSpacing: -0.5,
+    },
+    brandName: { fontSize: 15, fontWeight: 950, letterSpacing: -0.2 },
 
-// ✅ Conservation “raisonnable” (à adapter à ton backend réel)
-const SECURITY_LOGS_RETENTION = "6 à 12 mois (journaux techniques / anti-abus)";
+    navLinks: {
+        display: "flex",
+        gap: 10,
+        flexWrap: "wrap",
+        alignItems: "center",
+    },
+    btn: {
+        textDecoration: "none",
+        padding: "10px 12px",
+        borderRadius: 999,
+        border: `1px solid ${palette.border}`,
+        background: "rgba(255,255,255,0.9)",
+        color: palette.text,
+        fontWeight: 900,
+        fontSize: 13,
+    },
+    link: { color: palette.sub, textDecoration: "none", fontSize: 13 },
+
+    hero: {
+        marginTop: 14,
+        borderRadius: 24,
+        border: `1px solid ${palette.border}`,
+        background: "white",
+        overflow: "hidden",
+        boxShadow: "0 20px 70px rgba(15,23,42,0.09)",
+        position: "relative",
+    },
+    heroBg: {
+        position: "absolute",
+        inset: 0,
+        background: `radial-gradient(900px 340px at 15% 0%, rgba(43,106,92,0.16), transparent 60%),
+                 radial-gradient(900px 340px at 90% 10%, rgba(31,79,69,0.12), transparent 55%),
+                 linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,1))`,
+        pointerEvents: "none",
+    },
+    heroInner: { position: "relative", padding: "18px 18px" },
+    title: { margin: 0, fontSize: 28, letterSpacing: -0.7, fontWeight: 980 },
+    subtitle: {
+        marginTop: 10,
+        marginBottom: 0,
+        color: palette.sub,
+        lineHeight: 1.6,
+        fontSize: 14,
+    },
+    pillRow: { display: "flex", gap: 10, flexWrap: "wrap", marginTop: 12 },
+    pill: {
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 8,
+        padding: "8px 10px",
+        borderRadius: 999,
+        border: `1px solid ${palette.border}`,
+        background: "rgba(255,255,255,0.8)",
+        fontSize: 12,
+        fontWeight: 900,
+        color: palette.text,
+    },
+
+    content: {
+        marginTop: 14,
+        borderRadius: 18,
+        border: `1px solid ${palette.border}`,
+        background: "white",
+        boxShadow: "0 14px 40px rgba(15,23,42,0.06)",
+        overflow: "hidden",
+    },
+    section: {
+        padding: "16px 16px",
+        borderBottom: `1px solid ${palette.border}`,
+    },
+    h2: { margin: 0, fontSize: 16, fontWeight: 980, letterSpacing: -0.3 },
+    p: {
+        marginTop: 10,
+        marginBottom: 0,
+        color: palette.sub,
+        lineHeight: 1.75,
+        fontSize: 14,
+    },
+    ul: {
+        marginTop: 10,
+        marginBottom: 0,
+        paddingLeft: 18,
+        color: palette.sub,
+        lineHeight: 1.8,
+        fontSize: 14,
+    },
+    callout: {
+        marginTop: 12,
+        borderRadius: 16,
+        border: `1px solid rgba(43,106,92,0.20)`,
+        background: "rgba(43,106,92,0.06)",
+        padding: 12,
+    },
+    calloutWarn: {
+        marginTop: 12,
+        borderRadius: 16,
+        border: `1px solid rgba(239,68,68,0.20)`,
+        background: "rgba(239,68,68,0.05)",
+        padding: 12,
+    },
+    calloutTitle: {
+        margin: 0,
+        fontSize: 13,
+        fontWeight: 980,
+        color: palette.text,
+    },
+    calloutText: {
+        margin: "6px 0 0",
+        fontSize: 13,
+        color: palette.sub,
+        lineHeight: 1.6,
+    },
+
+    footer: {
+        marginTop: 18,
+        color: palette.sub,
+        fontSize: 13,
+        display: "flex",
+        justifyContent: "space-between",
+        gap: 12,
+        flexWrap: "wrap",
+        padding: "6px 2px 0",
+    },
+};
 
 export default function DeleteAccountPage() {
+    const year = new Date().getFullYear();
+    const updatedAt = "20/02/2026";
+    const contactEmail = "movencoapp@gmail.com";
+
     return (
-        <main style={{ maxWidth: 860, margin: "0 auto", padding: "48px 20px" }}>
-            <header style={{ marginBottom: 24 }}>
-                <h1 style={{ fontSize: 36, lineHeight: 1.1, marginBottom: 10 }}>
-                    Suppression de compte
-                </h1>
-                <p style={{ color: "#6B7280", margin: 0 }}>
-                    Cette page explique comment supprimer votre compte Movenco
-                    et ce qui est supprimé.
-                </p>
-            </header>
+        <main style={styles.page}>
+            <div style={styles.container}>
+                <header style={styles.nav}>
+                    <div style={styles.brand}>
+                        <div style={styles.logo}>M</div>
+                        <div style={styles.brandName}>Movenco</div>
+                    </div>
+                    <div style={styles.navLinks}>
+                        <Link href="/" style={styles.btn} className="btnHover">
+                            ← Home
+                        </Link>
+                        <Link
+                            href="/privacy"
+                            style={styles.btn}
+                            className="btnHover"
+                        >
+                            Privacy
+                        </Link>
+                        <Link
+                            href="/terms"
+                            style={styles.btn}
+                            className="btnHover"
+                        >
+                            Terms
+                        </Link>
+                    </div>
+                </header>
 
-            <section
-                style={{
-                    border: "1px solid #E5E7EB",
-                    borderRadius: 16,
-                    padding: 18,
-                    marginBottom: 18,
-                    background: "#FAFAFA",
-                }}
-            >
-                <h2 style={{ fontSize: 20, marginTop: 0 }}>
-                    Supprimer son compte depuis l’application
-                </h2>
+                <section style={styles.hero}>
+                    <div style={styles.heroBg} />
+                    <div style={styles.heroInner}>
+                        <h1 style={styles.title}>
+                            Delete your Movenco account
+                        </h1>
+                        <p style={styles.subtitle}>
+                            You can request account deletion directly in the
+                            Movenco app or by contacting support from this page.
+                        </p>
+                        <div style={styles.pillRow}>
+                            <span style={styles.pill}>🗑️ Account deletion</span>
+                            <span style={styles.pill}>📱 In-app available</span>
+                            <span style={styles.pill}>🌐 Web help page</span>
+                            <span style={styles.pill}>
+                                📅 Updated: {updatedAt}
+                            </span>
+                        </div>
+                    </div>
+                </section>
 
-                <p style={{ marginTop: 10, marginBottom: 0 }}>
-                    Chemin : <strong>{INAPP_PATH_FR}</strong>
-                </p>
+                <article style={styles.content}>
+                    <section style={styles.section}>
+                        <h2 style={styles.h2}>
+                            How to delete your account (in-app)
+                        </h2>
+                        <ul style={styles.ul}>
+                            <li>Open Movenco and sign in to your account.</li>
+                            <li>Go to your Profile / Settings.</li>
+                            <li>Tap “Delete my account”.</li>
+                            <li>Confirm the deletion request.</li>
+                        </ul>
 
-                <ol style={{ margin: "10px 0 0 18px" }}>
-                    <li>Ouvrez l’app Movenco</li>
-                    <li>Ouvrez le menu indiqué ci-dessus</li>
-                    <li>
-                        Touchez <strong>Supprimer mon compte</strong>
-                    </li>
-                    <li>Confirmez la suppression</li>
-                </ol>
+                        <div style={styles.calloutWarn}>
+                            <p style={styles.calloutTitle}>Important</p>
+                            <p style={styles.calloutText}>
+                                Account deletion is permanent. Once confirmed,
+                                you will lose access to your Movenco account.
+                            </p>
+                        </div>
+                    </section>
 
-                <p style={{ color: "#6B7280", marginTop: 12 }}>
-                    Une fois confirmée, la suppression est irréversible.
-                </p>
-            </section>
+                    <section style={styles.section}>
+                        <h2 style={styles.h2}>What is deleted</h2>
+                        <p style={styles.p}>
+                            When your account is deleted, Movenco deletes or
+                            cleans related data, including:
+                        </p>
+                        <ul style={styles.ul}>
+                            <li>Your user account and profile access</li>
+                            <li>Your avatar (profile image), when available</li>
+                            <li>Your block relationships (both directions)</li>
+                            <li>Your verification codes</li>
+                            <li>Events created by you</li>
+                            <li>
+                                Group chats linked to events you created (and
+                                related messages)
+                            </li>
+                            <li>Your participation in joined events</li>
+                        </ul>
+                    </section>
 
-            <section style={{ marginBottom: 18 }}>
-                <h2 style={{ fontSize: 20 }}>Données supprimées</h2>
-                <ul style={{ margin: "10px 0 0 18px" }}>
-                    <li>
-                        Votre compte et vos informations de profil (nom, avatar,
-                        etc.)
-                    </li>
-                    <li>Vos préférences et paramètres liés au compte</li>
-                    <li>
-                        Vos contenus associés au compte (selon les
-                        fonctionnalités de l’app)
-                    </li>
-                </ul>
-            </section>
+                    <section style={styles.section}>
+                        <h2 style={styles.h2}>What happens to messages</h2>
+                        <ul style={styles.ul}>
+                            <li>
+                                Private conversations (DMs) are removed from
+                                your side (“deleted for me”).
+                            </li>
+                            <li>
+                                If both participants deleted the same DM, the
+                                conversation and messages may be permanently
+                                removed.
+                            </li>
+                            <li>
+                                Group conversations are updated to remove your
+                                account. For events you created, related group
+                                chats are deleted with the event.
+                            </li>
+                        </ul>
+                    </section>
 
-            <section style={{ marginBottom: 18 }}>
-                <h2 style={{ fontSize: 20 }}>
-                    Données pouvant être conservées (cas limités)
-                </h2>
-                <p style={{ color: "#6B7280", marginTop: 10 }}>
-                    Pour des raisons de sécurité, de modération ou d’obligations
-                    légales, certaines données peuvent être conservées
-                    temporairement ou anonymisées :
-                </p>
-                <ul style={{ margin: "10px 0 0 18px" }}>
-                    <li>
-                        <strong>Journaux techniques / sécurité</strong> :{" "}
-                        {SECURITY_LOGS_RETENTION}
-                    </li>
-                    <li>
-                        <strong>Contenu signalé</strong> : peut être conservé le
-                        temps du traitement/modération, puis supprimé ou
-                        anonymisé
-                    </li>
-                    <li>
-                        <strong>Contraintes légales</strong> : si applicable,
-                        conservation minimale imposée par la loi
-                    </li>
-                </ul>
-            </section>
+                    <section style={styles.section}>
+                        <h2 style={styles.h2}>What may be kept temporarily</h2>
+                        <p style={styles.p}>
+                            Some limited technical data may remain temporarily
+                            in backups or security logs for legal, fraud
+                            prevention, or technical reasons. This data is not
+                            used to reactivate your account.
+                        </p>
+                    </section>
 
-            <section style={{ marginBottom: 18 }}>
-                <h2 style={{ fontSize: 20 }}>Délais</h2>
-                <p style={{ marginTop: 10 }}>
-                    La suppression est <strong>{DELETION_EFFECT}</strong> après
-                    confirmation. La purge complète des données peut prendre
-                    jusqu’à <strong>{FULL_PURGE_MAX_DAYS} jours</strong>
-                    (selon les contraintes techniques et de sécurité).
-                </p>
-            </section>
-
-            <section
-                style={{
-                    border: "1px solid #E5E7EB",
-                    borderRadius: 16,
-                    padding: 18,
-                    background: "#FFFFFF",
-                }}
-            >
-                <h2 style={{ fontSize: 20, marginTop: 0 }}>Besoin d’aide ?</h2>
-                <p style={{ marginTop: 10 }}>
-                    Contact support :{" "}
-                    <a
-                        href={`mailto:${SUPPORT_EMAIL}`}
-                        style={{ fontWeight: 700 }}
+                    <section
+                        style={{ ...styles.section, borderBottom: "none" }}
                     >
-                        {SUPPORT_EMAIL}
-                    </a>
-                </p>
-                <p style={{ color: "#6B7280", marginTop: 10 }}>
-                    Consultez aussi notre{" "}
-                    <Link
-                        href="/privacy"
-                        style={{ textDecoration: "underline" }}
-                    >
-                        Politique de confidentialité
-                    </Link>
-                    .
-                </p>
-            </section>
+                        <h2 style={styles.h2}>
+                            Need help or cannot access the app?
+                        </h2>
+                        <p style={styles.p}>
+                            If you cannot log in and still want your account
+                            deleted, contact support:
+                        </p>
+                        <div style={styles.callout}>
+                            <p style={styles.calloutTitle}>Support contact</p>
+                            <p style={styles.calloutText}>
+                                Email:{" "}
+                                <a
+                                    href={`mailto:${contactEmail}`}
+                                    style={{
+                                        color: palette.primary,
+                                        fontWeight: 950,
+                                        textDecoration: "none",
+                                    }}
+                                >
+                                    {contactEmail}
+                                </a>
+                                <br />
+                                You can include your account email / phone
+                                number used in Movenco to help us locate your
+                                account.
+                            </p>
+                        </div>
 
-            <hr
-                style={{
-                    border: "none",
-                    borderTop: "1px solid #E5E7EB",
-                    margin: "28px 0",
-                }}
-            />
+                        <p style={styles.p}>
+                            See also our{" "}
+                            <Link
+                                href="/privacy"
+                                style={{
+                                    color: palette.primary,
+                                    fontWeight: 950,
+                                    textDecoration: "none",
+                                }}
+                            >
+                                Privacy Policy
+                            </Link>{" "}
+                            for details about personal data processing.
+                        </p>
+                    </section>
+                </article>
 
-            <section>
-                <h2 style={{ fontSize: 20 }}>English</h2>
-                <p style={{ color: "#6B7280", marginTop: 6 }}>
-                    How to delete your Movenco account
-                </p>
+                <footer style={styles.footer}>
+                    <div>© {year} Movenco</div>
+                    <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+                        <Link href="/" style={styles.link}>
+                            Home
+                        </Link>
+                        <Link href="/privacy" style={styles.link}>
+                            Privacy
+                        </Link>
+                        <Link href="/terms" style={styles.link}>
+                            Terms
+                        </Link>
+                    </div>
+                </footer>
 
-                <h3 style={{ fontSize: 16, marginTop: 14 }}>In-app deletion</h3>
-                <p style={{ marginTop: 10, marginBottom: 0 }}>
-                    Path: <strong>{INAPP_PATH_EN}</strong>
-                </p>
-                <ol style={{ margin: "10px 0 0 18px" }}>
-                    <li>Open the Movenco app</li>
-                    <li>Open the menu shown above</li>
-                    <li>
-                        Tap <strong>Delete my account</strong>
-                    </li>
-                    <li>Confirm</li>
-                </ol>
+                <style>{`
+          html { scroll-behavior: smooth; }
 
-                <h3 style={{ fontSize: 16, marginTop: 14 }}>Data removed</h3>
-                <ul style={{ margin: "10px 0 0 18px" }}>
-                    <li>
-                        Your account and profile information (name, avatar,
-                        etc.)
-                    </li>
-                    <li>Your account-related preferences and settings</li>
-                    <li>
-                        Your account-associated content (depending on app
-                        features)
-                    </li>
-                </ul>
+          .btnHover {
+            transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease;
+          }
+          .btnHover:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.02);
+            box-shadow: 0 18px 45px rgba(15,23,42,0.10);
+          }
 
-                <h3 style={{ fontSize: 16, marginTop: 14 }}>
-                    Data that may be retained (limited cases)
-                </h3>
-                <ul style={{ margin: "10px 0 0 18px" }}>
-                    <li>
-                        <strong>Security/technical logs</strong>:{" "}
-                        {SECURITY_LOGS_RETENTION}
-                    </li>
-                    <li>
-                        <strong>Reported content</strong>: may be retained for
-                        moderation then deleted/anonymized
-                    </li>
-                    <li>
-                        <strong>Legal obligations</strong>: if applicable
-                    </li>
-                </ul>
-
-                <p style={{ marginTop: 12 }}>
-                    Support:{" "}
-                    <a
-                        href={`mailto:${SUPPORT_EMAIL}`}
-                        style={{ fontWeight: 700 }}
-                    >
-                        {SUPPORT_EMAIL}
-                    </a>
-                </p>
-            </section>
+          @media (max-width: 980px) {
+            .layout { grid-template-columns: 1fr !important; }
+          }
+        `}</style>
+            </div>
         </main>
     );
 }
