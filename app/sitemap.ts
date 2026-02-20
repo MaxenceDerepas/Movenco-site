@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const base = "https://movencoapp.com"; // ✅ adapte si tu utilises www
+    const base = "https://www.movencoapp.com"; // ✅ adapte si tu utilises www
     const now = new Date();
 
     // ✅ Liste des pages publiques importantes
@@ -12,7 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         "/terms",
         "/support",
         "/delete-account",
-        "/press",
     ];
 
     return routes.map((path) => ({

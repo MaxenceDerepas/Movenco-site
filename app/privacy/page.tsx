@@ -203,21 +203,26 @@ export default function PrivacyPage() {
     const updatedAt = "20/02/2026";
     const contactEmail = "movencoapp@gmail.com";
 
+    const controllerName = "Maxence Derepas (Movenco)";
+    const controllerAddress = "36 rue de Migneaux, 78300 Poissy, France";
+
     const toc = [
         { id: "controller", label: "1. Responsable du traitement" },
-        { id: "data", label: "2. Données collectées" },
-        { id: "purposes", label: "3. Finalités" },
-        { id: "legal-basis", label: "4. Bases légales" },
-        { id: "geo", label: "5. Géolocalisation" },
-        { id: "recipients", label: "6. Destinataires" },
-        { id: "retention", label: "7. Conservation" },
-        { id: "delete", label: "8. Suppression de compte" },
-        { id: "security", label: "9. Sécurité" },
-        { id: "rights", label: "10. Vos droits" },
-        { id: "minors", label: "11. Mineurs" },
-        { id: "external", label: "12. Liens externes" },
-        { id: "changes", label: "13. Modifications" },
-        { id: "contact", label: "14. Contact" },
+        { id: "scope", label: "2. Portée" },
+        { id: "data", label: "3. Données collectées" },
+        { id: "purposes", label: "4. Finalités" },
+        { id: "legal-basis", label: "5. Bases légales" },
+        { id: "geo", label: "6. Géolocalisation" },
+        { id: "providers", label: "7. Prestataires / sous-traitants" },
+        { id: "recipients", label: "8. Destinataires" },
+        { id: "retention", label: "9. Conservation" },
+        { id: "delete", label: "10. Suppression de compte" },
+        { id: "security", label: "11. Sécurité" },
+        { id: "rights", label: "12. Vos droits" },
+        { id: "minors", label: "13. Mineurs" },
+        { id: "external", label: "14. Liens externes" },
+        { id: "changes", label: "15. Modifications" },
+        { id: "contact", label: "16. Contact" },
     ];
 
     return (
@@ -266,8 +271,8 @@ export default function PrivacyPage() {
                         <p style={styles.subtitle}>
                             Cette politique explique comment Movenco collecte,
                             utilise, conserve et protège vos données
-                            personnelles dans le cadre de l’utilisation de
-                            l’application mobile.
+                            personnelles dans le cadre de l’utilisation du site
+                            et de l’application mobile.
                         </p>
                         <div style={styles.metaRow}>
                             <span style={styles.pill}>🛡️ RGPD</span>
@@ -306,8 +311,10 @@ export default function PrivacyPage() {
                                 1. Responsable du traitement
                             </h2>
                             <p style={styles.p}>
-                                Le responsable du traitement est l’éditeur de
-                                l’application Movenco.
+                                Le responsable du traitement des données
+                                personnelles est{" "}
+                                <strong>{controllerName}</strong>,{" "}
+                                {controllerAddress}.
                             </p>
                             <p style={styles.p}>
                                 Pour toute question relative à la protection des
@@ -337,10 +344,37 @@ export default function PrivacyPage() {
                                     {contactEmail}
                                 </a>
                             </p>
+
+                            <div style={styles.callout}>
+                                <p style={styles.calloutTitle}>
+                                    ✅ Infrastructure actuelle
+                                </p>
+                                <p style={styles.calloutText}>
+                                    Movenco utilise actuellement Vercel (site
+                                    web), Hostinger (backend API), MongoDB (base
+                                    de données) et Cloudinary (stockage médias).
+                                    L’application n’intègre pas de publicité à
+                                    ce jour.
+                                </p>
+                            </div>
+                        </section>
+
+                        <section id="scope" style={styles.section}>
+                            <h2 style={styles.h2}>2. Portée</h2>
+                            <p style={styles.p}>Cette politique s’applique :</p>
+                            <ul style={styles.ul}>
+                                <li>au site vitrine Movenco ;</li>
+                                <li>à l’application mobile Movenco ;</li>
+                                <li>
+                                    aux fonctionnalités sociales associées
+                                    (profil, messagerie, événements,
+                                    géolocalisation de proximité).
+                                </li>
+                            </ul>
                         </section>
 
                         <section id="data" style={styles.section}>
-                            <h2 style={styles.h2}>2. Données collectées</h2>
+                            <h2 style={styles.h2}>3. Données collectées</h2>
                             <p style={styles.p}>
                                 Selon votre utilisation de l’application, nous
                                 pouvons collecter les catégories de données
@@ -349,8 +383,8 @@ export default function PrivacyPage() {
                             <ul style={styles.ul}>
                                 <li>
                                     <strong>Données de compte</strong> : nom /
-                                    pseudo, adresse email, identifiants de
-                                    connexion.
+                                    pseudo, adresse email et/ou numéro de
+                                    téléphone, identifiants de connexion.
                                 </li>
                                 <li>
                                     <strong>Données de profil</strong> : photo
@@ -370,30 +404,30 @@ export default function PrivacyPage() {
                                         Données de contenu et interactions
                                     </strong>{" "}
                                     : messages privés et de groupe, contenus
-                                    publiés, signalements, blocages,
-                                    interactions liées au compte.
+                                    publiés, commentaires, réactions,
+                                    signalements, blocages, interactions liées
+                                    au compte.
+                                </li>
+                                <li>
+                                    <strong>Données d’événements</strong> :
+                                    événements créés, événements rejoints,
+                                    informations liées aux participations
+                                    (titre, lieu, description, date, etc.).
                                 </li>
                                 <li>
                                     <strong>Données techniques</strong> :
                                     identifiants techniques de session, token
                                     d’authentification, langue, journaux
-                                    techniques, informations nécessaires au
-                                    fonctionnement du service.
-                                </li>
-                                <li>
-                                    <strong>
-                                        Données publicitaires (si applicable)
-                                    </strong>{" "}
-                                    : données nécessaires à l’affichage et à la
-                                    mesure des publicités, ainsi qu’à la gestion
-                                    de vos préférences de consentement.
+                                    techniques, adresse IP, informations
+                                    nécessaires au fonctionnement et à la
+                                    sécurité du service.
                                 </li>
                             </ul>
                         </section>
 
                         <section id="purposes" style={styles.section}>
                             <h2 style={styles.h2}>
-                                3. Finalités du traitement
+                                4. Finalités du traitement
                             </h2>
                             <p style={styles.p}>
                                 Nous utilisons vos données pour :
@@ -407,16 +441,21 @@ export default function PrivacyPage() {
                                     service ;
                                 </li>
                                 <li>
-                                    afficher votre profil et vos préférences
-                                    sportives ;
+                                    afficher votre profil, vos préférences
+                                    sportives et vos contenus ;
                                 </li>
                                 <li>
                                     permettre la géolocalisation des
                                     utilisateurs et événements à proximité ;
                                 </li>
                                 <li>
-                                    fournir la messagerie et les échanges entre
+                                    fournir la messagerie, les échanges de
+                                    groupe et les interactions entre
                                     utilisateurs ;
+                                </li>
+                                <li>
+                                    permettre la création, la gestion et la
+                                    participation aux événements ;
                                 </li>
                                 <li>
                                     modérer la plateforme (signalements,
@@ -435,7 +474,7 @@ export default function PrivacyPage() {
                         </section>
 
                         <section id="legal-basis" style={styles.section}>
-                            <h2 style={styles.h2}>4. Bases légales (RGPD)</h2>
+                            <h2 style={styles.h2}>5. Bases légales (RGPD)</h2>
                             <p style={styles.p}>
                                 Les traitements reposent, selon les cas, sur :
                             </p>
@@ -447,14 +486,14 @@ export default function PrivacyPage() {
                                 </li>
                                 <li>
                                     <strong>votre consentement</strong> :
-                                    notamment pour la géolocalisation et, le cas
-                                    échéant, certaines technologies
-                                    publicitaires ;
+                                    notamment pour la géolocalisation et
+                                    certaines autorisations système (ex.
+                                    photos/caméra si vous les activez) ;
                                 </li>
                                 <li>
                                     <strong>notre intérêt légitime</strong> :
-                                    sécurité, lutte contre les abus,
-                                    amélioration du service ;
+                                    sécurité, lutte contre les abus, prévention
+                                    de la fraude, amélioration du service ;
                                 </li>
                                 <li>
                                     <strong>nos obligations légales</strong> :
@@ -465,7 +504,7 @@ export default function PrivacyPage() {
                         </section>
 
                         <section id="geo" style={styles.section}>
-                            <h2 style={styles.h2}>5. Géolocalisation</h2>
+                            <h2 style={styles.h2}>6. Géolocalisation</h2>
                             <p style={styles.p}>
                                 La géolocalisation est utilisée pour proposer
                                 les fonctionnalités de proximité de Movenco.
@@ -477,19 +516,55 @@ export default function PrivacyPage() {
                                     téléphone.
                                 </li>
                                 <li>
-                                    Certaines fonctionnalités peuvent alors être
-                                    limitées.
+                                    Certaines fonctionnalités (ex. “Autour de
+                                    moi”) peuvent alors être limitées ou
+                                    indisponibles.
                                 </li>
                                 <li>
                                     Votre position exacte n’a pas vocation à
-                                    être affichée publiquement telle quelle.
+                                    être affichée publiquement telle quelle aux
+                                    autres utilisateurs.
                                 </li>
                             </ul>
                         </section>
 
+                        <section id="providers" style={styles.section}>
+                            <h2 style={styles.h2}>
+                                7. Prestataires / sous-traitants
+                            </h2>
+                            <p style={styles.p}>
+                                Nous faisons appel à des prestataires techniques
+                                pour faire fonctionner le service, notamment :
+                            </p>
+                            <ul style={styles.ul}>
+                                <li>
+                                    <strong>Vercel</strong> : hébergement du
+                                    site web.
+                                </li>
+                                <li>
+                                    <strong>Hostinger</strong> : hébergement du
+                                    backend API.
+                                </li>
+                                <li>
+                                    <strong>MongoDB</strong> : base de données
+                                    applicative.
+                                </li>
+                                <li>
+                                    <strong>Cloudinary</strong> : stockage et
+                                    gestion des médias (ex. avatars).
+                                </li>
+                            </ul>
+                            <p style={styles.p}>
+                                Ces prestataires agissent en qualité de
+                                sous-traitants techniques, dans la limite de
+                                leurs missions, et sont soumis à des obligations
+                                de sécurité et de confidentialité.
+                            </p>
+                        </section>
+
                         <section id="recipients" style={styles.section}>
                             <h2 style={styles.h2}>
-                                6. Destinataires des données
+                                8. Destinataires des données
                             </h2>
                             <p style={styles.p}>
                                 Vos données peuvent être accessibles :
@@ -498,8 +573,8 @@ export default function PrivacyPage() {
                                 <li>aux équipes habilitées de Movenco ;</li>
                                 <li>
                                     à nos prestataires techniques (hébergement,
-                                    infrastructure, cloud, analytics,
-                                    messagerie, publicité le cas échéant) ;
+                                    infrastructure, base de données, stockage
+                                    médias) ;
                                 </li>
                                 <li>
                                     aux autorités compétentes si la loi l’exige.
@@ -512,7 +587,7 @@ export default function PrivacyPage() {
                         </section>
 
                         <section id="retention" style={styles.section}>
-                            <h2 style={styles.h2}>7. Durée de conservation</h2>
+                            <h2 style={styles.h2}>9. Durée de conservation</h2>
                             <p style={styles.p}>
                                 Nous conservons vos données pendant la durée
                                 nécessaire aux finalités décrites dans cette
@@ -558,7 +633,7 @@ export default function PrivacyPage() {
                         </section>
 
                         <section id="delete" style={styles.section}>
-                            <h2 style={styles.h2}>8. Suppression de compte</h2>
+                            <h2 style={styles.h2}>10. Suppression de compte</h2>
                             <p style={styles.p}>
                                 Vous pouvez demander la suppression de votre
                                 compte :
@@ -589,7 +664,7 @@ export default function PrivacyPage() {
                         </section>
 
                         <section id="security" style={styles.section}>
-                            <h2 style={styles.h2}>9. Sécurité des données</h2>
+                            <h2 style={styles.h2}>11. Sécurité des données</h2>
                             <p style={styles.p}>
                                 Nous mettons en place des mesures techniques et
                                 organisationnelles raisonnables pour protéger
@@ -611,7 +686,7 @@ export default function PrivacyPage() {
                         </section>
 
                         <section id="rights" style={styles.section}>
-                            <h2 style={styles.h2}>10. Vos droits</h2>
+                            <h2 style={styles.h2}>12. Vos droits</h2>
                             <p style={styles.p}>
                                 Conformément au RGPD et aux lois applicables,
                                 vous disposez notamment des droits suivants :
@@ -656,11 +731,13 @@ export default function PrivacyPage() {
                         </section>
 
                         <section id="minors" style={styles.section}>
-                            <h2 style={styles.h2}>11. Mineurs</h2>
+                            <h2 style={styles.h2}>13. Mineurs</h2>
                             <p style={styles.p}>
-                                L’application n’est pas destinée à une
-                                utilisation contraire aux règles d’âge
-                                applicables dans votre pays.
+                                Movenco n’est pas destiné aux enfants. L’usage
+                                du service est réservé aux utilisateurs
+                                respectant l’âge minimum prévu par les
+                                conditions d’utilisation et la réglementation
+                                applicable.
                             </p>
                             <p style={styles.p}>
                                 Si vous pensez qu’un mineur nous a transmis des
@@ -671,18 +748,19 @@ export default function PrivacyPage() {
                         </section>
 
                         <section id="external" style={styles.section}>
-                            <h2 style={styles.h2}>12. Liens externes</h2>
+                            <h2 style={styles.h2}>14. Liens externes</h2>
                             <p style={styles.p}>
-                                L’application peut contenir des liens vers des
-                                sites tiers (support, pages légales, etc.). Nous
-                                ne sommes pas responsables des pratiques de
-                                confidentialité de ces sites tiers.
+                                Le site ou l’application peut contenir des liens
+                                vers des sites tiers (support, pages légales,
+                                services externes). Nous ne sommes pas
+                                responsables des pratiques de confidentialité de
+                                ces sites tiers.
                             </p>
                         </section>
 
                         <section id="changes" style={styles.section}>
                             <h2 style={styles.h2}>
-                                13. Modifications de la politique
+                                15. Modifications de la politique
                             </h2>
                             <p style={styles.p}>
                                 Nous pouvons mettre à jour la présente Politique
@@ -700,7 +778,7 @@ export default function PrivacyPage() {
                             id="contact"
                             style={{ ...styles.section, borderBottom: "none" }}
                         >
-                            <h2 style={styles.h2}>14. Contact</h2>
+                            <h2 style={styles.h2}>16. Contact</h2>
                             <p style={styles.p}>
                                 Support :{" "}
                                 <Link

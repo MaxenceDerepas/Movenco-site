@@ -1,12 +1,11 @@
-// app/legal/page.tsx
 import Link from "next/link";
 import type { Metadata } from "next";
-import React from "react";
+import type { CSSProperties } from "react";
 
 export const metadata: Metadata = {
     title: "Mentions légales — Movenco",
     description:
-        "Mentions légales Movenco (LCEN) : éditeur, hébergeur, contact, propriété intellectuelle, responsabilité, données personnelles.",
+        "Mentions légales Movenco (LCEN) : éditeur, hébergeurs, contact, propriété intellectuelle, responsabilité, données personnelles et modération.",
 };
 
 const palette = {
@@ -15,11 +14,10 @@ const palette = {
     bg: "#f6f7f8",
     text: "#0f172a",
     sub: "#64748b",
-    card: "#ffffff",
     border: "#e5e7eb",
 };
 
-const styles: Record<string, React.CSSProperties> = {
+const styles: Record<string, CSSProperties> = {
     page: { minHeight: "100vh", background: palette.bg, color: palette.text },
     container: { maxWidth: 980, margin: "0 auto", padding: "22px 18px 54px" },
 
@@ -162,6 +160,14 @@ const styles: Record<string, React.CSSProperties> = {
         lineHeight: 1.75,
         fontSize: 14,
     },
+    ul: {
+        marginTop: 10,
+        marginBottom: 0,
+        paddingLeft: 18,
+        color: palette.sub,
+        lineHeight: 1.8,
+        fontSize: 14,
+    },
 
     callout: {
         marginTop: 12,
@@ -193,37 +199,38 @@ const styles: Record<string, React.CSSProperties> = {
 
 export default function LegalPage() {
     const year = new Date().getFullYear();
-
-    // ✅ À personnaliser (mais déjà “store-ready”)
-    const updatedAt = "11/02/2026";
+    const updatedAt = "20/02/2026";
 
     // Éditeur
     const editorName = "Maxence Derepas";
     const editorStatus = "Auto-entrepreneur";
-    const siret = "897 929 717 00022"; // ✅ ton SIRET
-
-    // ⚠️ À renseigner (idéalement via domiciliation)
-    const address = "36 rue de migneaux, Poissy 78300";
-
+    const siret = "897 929 717 00022";
+    const address = "36 rue de Migneaux, 78300 Poissy, France";
     const email = "movencoapp@gmail.com";
 
-    // Hébergeur (site)
-    const hostName = "Vercel Inc.";
-    const hostAddress = "340 S Lemon Ave #4133, Walnut, CA 91789, USA";
-    const hostWebsite = "https://vercel.com";
+    // Hébergement site
+    const webHostName = "Vercel Inc.";
+    const webHostAddress = "340 S Lemon Ave #4133, Walnut, CA 91789, USA";
+    const webHostWebsite = "https://vercel.com";
+
+    // Infra app
+    const apiHostName = "Hostinger";
+    const apiHostWebsite = "https://www.hostinger.com";
+    const databaseName = "MongoDB";
+    const mediaProvider = "Cloudinary";
 
     const toc = [
-        { id: "editor", label: "1. Éditeur du site" },
-        { id: "app", label: "2. Éditeur de l’application" },
-        { id: "director", label: "3. Directeur de publication" },
-        { id: "host", label: "4. Hébergeur" },
+        { id: "editor", label: "1. Éditeur" },
+        { id: "publication", label: "2. Directeur de publication" },
+        { id: "hosting", label: "3. Hébergement du site" },
+        { id: "app", label: "4. Application mobile" },
         { id: "contact", label: "5. Contact" },
         { id: "ip", label: "6. Propriété intellectuelle" },
         { id: "liability", label: "7. Responsabilité" },
         { id: "links", label: "8. Liens externes" },
         { id: "privacy", label: "9. Données personnelles" },
         { id: "cookies", label: "10. Cookies / traceurs" },
-        { id: "reporting", label: "11. Signalement & modération" },
+        { id: "moderation", label: "11. Signalement & modération" },
         { id: "law", label: "12. Droit applicable" },
     ];
 
@@ -272,6 +279,7 @@ export default function LegalPage() {
                         <div style={styles.metaRow}>
                             <span style={styles.pill}>📌 LCEN</span>
                             <span style={styles.pill}>⚖️ France</span>
+                            <span style={styles.pill}>📱 App + site</span>
                             <span style={styles.pill}>
                                 📅 Mise à jour : {updatedAt}
                             </span>
@@ -301,9 +309,9 @@ export default function LegalPage() {
 
                     <article style={styles.content}>
                         <section id="editor" style={styles.section}>
-                            <h2 style={styles.h2}>1. Éditeur du site</h2>
+                            <h2 style={styles.h2}>1. Éditeur</h2>
                             <p style={styles.p}>
-                                <strong>Éditeur :</strong> {editorName}
+                                <strong>Nom / Éditeur :</strong> {editorName}
                                 <br />
                                 <strong>Statut :</strong> {editorStatus}
                                 <br />
@@ -314,33 +322,89 @@ export default function LegalPage() {
 
                             <div style={styles.callout}>
                                 <p style={styles.calloutTitle}>
-                                    ✅ Adresse : recommandation pro
+                                    ℹ️ Information
                                 </p>
                                 <p style={styles.calloutText}>
-                                    Pour éviter d’afficher une adresse
-                                    personnelle, il est courant d’utiliser une
-                                    société de domiciliation. L’important est
-                                    d’indiquer une{" "}
-                                    <strong>adresse légale</strong> permettant
-                                    de contacter l’éditeur.
+                                    Ces mentions concernent le site vitrine
+                                    Movenco ainsi que l’application mobile
+                                    Movenco, sauf mention contraire.
                                 </p>
                             </div>
                         </section>
 
-                        <section id="app" style={styles.section}>
+                        <section id="publication" style={styles.section}>
                             <h2 style={styles.h2}>
-                                2. Éditeur de l’application
+                                2. Directeur de publication
                             </h2>
                             <p style={styles.p}>
-                                L’application mobile <strong>Movenco</strong>{" "}
-                                est éditée par {editorName} ({editorStatus}),
-                                SIRET {siret}.
+                                <strong>Directeur de publication :</strong>{" "}
+                                {editorName}
+                            </p>
+                        </section>
+
+                        <section id="hosting" style={styles.section}>
+                            <h2 style={styles.h2}>3. Hébergement du site</h2>
+                            <p style={styles.p}>
+                                <strong>Hébergeur :</strong> {webHostName}
+                                <br />
+                                <strong>Adresse :</strong> {webHostAddress}
+                                <br />
+                                <strong>Site :</strong>{" "}
+                                <a
+                                    href={webHostWebsite}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    style={{
+                                        color: palette.primary,
+                                        fontWeight: 900,
+                                        textDecoration: "none",
+                                    }}
+                                >
+                                    {webHostWebsite}
+                                </a>
                             </p>
                             <p style={styles.p}>
-                                Les informations relatives aux traitements de
-                                données, à la gestion du consentement
-                                publicitaire et à la suppression de compte sont
-                                détaillées dans la{" "}
+                                Le site web Movenco est hébergé et servi via
+                                l’infrastructure de {webHostName}.
+                            </p>
+                        </section>
+
+                        <section id="app" style={styles.section}>
+                            <h2 style={styles.h2}>4. Application mobile</h2>
+                            <p style={styles.p}>
+                                L’application mobile <strong>Movenco</strong>{" "}
+                                est éditée par {editorName} ({editorStatus}).
+                            </p>
+                            <p style={styles.p}>
+                                L’API backend de l’application est hébergée chez{" "}
+                                <strong>{apiHostName}</strong> (
+                                <a
+                                    href={apiHostWebsite}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    style={{
+                                        color: palette.primary,
+                                        fontWeight: 900,
+                                        textDecoration: "none",
+                                    }}
+                                >
+                                    {apiHostWebsite}
+                                </a>
+                                ).
+                            </p>
+                            <p style={styles.p}>
+                                Les données applicatives sont stockées via{" "}
+                                <strong>{databaseName}</strong>, et les médias
+                                utilisateurs (ex. avatars) sont gérés via{" "}
+                                <strong>{mediaProvider}</strong>.
+                            </p>
+                            <p style={styles.p}>
+                                À ce jour, l’application n’utilise pas de
+                                service publicitaire intégré.
+                            </p>
+                            <p style={styles.p}>
+                                Pour plus d’informations :
+                                <br />-{" "}
                                 <Link
                                     href="/privacy"
                                     style={{
@@ -350,8 +414,19 @@ export default function LegalPage() {
                                     }}
                                 >
                                     Politique de confidentialité
-                                </Link>{" "}
-                                et sur la page{" "}
+                                </Link>
+                                <br />-{" "}
+                                <Link
+                                    href="/terms"
+                                    style={{
+                                        color: palette.primary,
+                                        fontWeight: 950,
+                                        textDecoration: "none",
+                                    }}
+                                >
+                                    Conditions d’utilisation
+                                </Link>
+                                <br />-{" "}
                                 <Link
                                     href="/delete-account"
                                     style={{
@@ -362,44 +437,6 @@ export default function LegalPage() {
                                 >
                                     Suppression de compte
                                 </Link>
-                                .
-                            </p>
-                        </section>
-
-                        <section id="director" style={styles.section}>
-                            <h2 style={styles.h2}>
-                                3. Directeur de publication
-                            </h2>
-                            <p style={styles.p}>
-                                <strong>Directeur de publication :</strong>{" "}
-                                {editorName}
-                            </p>
-                        </section>
-
-                        <section id="host" style={styles.section}>
-                            <h2 style={styles.h2}>4. Hébergeur</h2>
-                            <p style={styles.p}>
-                                <strong>Hébergeur :</strong> {hostName}
-                                <br />
-                                <strong>Adresse :</strong> {hostAddress}
-                                <br />
-                                <strong>Site :</strong>{" "}
-                                <a
-                                    href={hostWebsite}
-                                    style={{
-                                        color: palette.primary,
-                                        fontWeight: 900,
-                                        textDecoration: "none",
-                                    }}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    {hostWebsite}
-                                </a>
-                            </p>
-                            <p style={styles.p}>
-                                Le site est hébergé et servi via
-                                l’infrastructure de {hostName}.
                             </p>
                         </section>
 
@@ -419,9 +456,20 @@ export default function LegalPage() {
                                 </a>
                             </p>
                             <p style={styles.p}>
-                                Pour toute demande liée à vos données ou à la
-                                suppression de compte, vous pouvez également
-                                consulter la page{" "}
+                                Pour les demandes relatives aux données
+                                personnelles ou à la suppression de compte,
+                                merci de consulter également les pages{" "}
+                                <Link
+                                    href="/privacy"
+                                    style={{
+                                        color: palette.primary,
+                                        fontWeight: 950,
+                                        textDecoration: "none",
+                                    }}
+                                >
+                                    Confidentialité
+                                </Link>{" "}
+                                et{" "}
                                 <Link
                                     href="/delete-account"
                                     style={{
@@ -441,90 +489,57 @@ export default function LegalPage() {
                                 6. Propriété intellectuelle
                             </h2>
                             <p style={styles.p}>
-                                L’ensemble des éléments du site (textes,
-                                graphismes, logos, interface, structure, etc.)
-                                et, le cas échéant, de l’application Movenco,
-                                sont protégés par le droit de la propriété
-                                intellectuelle.
+                                L’ensemble des contenus et éléments composant le
+                                site et l’application Movenco (textes, visuels,
+                                graphismes, logos, interface, structure, code,
+                                éléments de marque, etc.) est protégé par les
+                                lois relatives à la propriété intellectuelle.
                             </p>
                             <p style={styles.p}>
                                 Toute reproduction, représentation,
-                                modification, publication, adaptation totale ou
-                                partielle des éléments du site, quel que soit le
-                                moyen ou le procédé utilisé, est interdite, sauf
-                                autorisation écrite préalable.
+                                modification, publication ou adaptation, totale
+                                ou partielle, de ces éléments est interdite sans
+                                autorisation écrite préalable de l’éditeur, sauf
+                                cas expressément prévus par la loi.
                             </p>
                         </section>
 
                         <section id="liability" style={styles.section}>
                             <h2 style={styles.h2}>7. Responsabilité</h2>
                             <p style={styles.p}>
-                                Les informations diffusées sur le site sont
-                                fournies à titre indicatif. Malgré le soin
-                                apporté, l’éditeur ne peut garantir
-                                l’exactitude, l’exhaustivité ou l’actualité des
-                                contenus.
+                                Les informations publiées sur le site sont
+                                fournies à titre informatif. Malgré le soin
+                                apporté à leur mise à jour, l’éditeur ne peut
+                                garantir l’exactitude, l’exhaustivité ou
+                                l’actualité de toutes les informations.
                             </p>
                             <p style={styles.p}>
-                                L’éditeur ne saurait être tenu responsable des
-                                dommages directs ou indirects pouvant résulter
-                                de l’accès au site ou de son utilisation, sauf
-                                dispositions légales impératives contraires.
+                                L’éditeur ne pourra être tenu responsable des
+                                dommages directs ou indirects liés à
+                                l’utilisation du site ou de l’application, sauf
+                                disposition légale impérative contraire.
                             </p>
                         </section>
 
                         <section id="links" style={styles.section}>
                             <h2 style={styles.h2}>8. Liens externes</h2>
                             <p style={styles.p}>
-                                Le site peut contenir des liens vers des sites
-                                tiers. L’éditeur n’exerce aucun contrôle sur ces
-                                sites et décline toute responsabilité quant à
-                                leur contenu ou à leurs pratiques.
+                                Le site et/ou l’application peuvent contenir des
+                                liens vers des services ou sites tiers.
+                                L’éditeur n’exerce pas de contrôle sur ces
+                                ressources externes et ne peut être tenu
+                                responsable de leur contenu, disponibilité ou
+                                pratiques.
                             </p>
                         </section>
 
                         <section id="privacy" style={styles.section}>
                             <h2 style={styles.h2}>9. Données personnelles</h2>
                             <p style={styles.p}>
-                                Le traitement des données personnelles est
-                                décrit dans la{" "}
-                                <Link
-                                    href="/privacy"
-                                    style={{
-                                        color: palette.primary,
-                                        fontWeight: 950,
-                                        textDecoration: "none",
-                                    }}
-                                >
-                                    Politique de confidentialité
-                                </Link>
-                                . Vous y trouverez notamment les informations
-                                relatives aux données collectées, aux finalités,
-                                aux bases légales et à l’exercice de vos droits
-                                (RGPD).
-                            </p>
-                            <p style={styles.p}>
-                                <strong>Autorité de contrôle :</strong> CNIL
-                                (Commission nationale de l’informatique et des
-                                libertés).
-                            </p>
-                        </section>
-
-                        <section id="cookies" style={styles.section}>
-                            <h2 style={styles.h2}>10. Cookies / traceurs</h2>
-                            <p style={styles.p}>
-                                Le site peut utiliser des cookies strictement
-                                nécessaires au fonctionnement. Si des cookies de
-                                mesure d’audience ou marketing sont ajoutés, un
-                                mécanisme de consentement sera mis en place
-                                conformément à la réglementation.
-                            </p>
-                            <p style={styles.p}>
-                                Dans l’application, la gestion du consentement
-                                publicitaire peut être proposée via une
-                                plateforme de gestion du consentement (CMP) et
-                                un écran de “Paramètres de confidentialité”.
-                                Détails dans la{" "}
+                                Les informations relatives au traitement des
+                                données personnelles (catégories de données,
+                                finalités, bases légales, conservation, droits
+                                RGPD, etc.) sont disponibles dans la{" "}
                                 <Link
                                     href="/privacy"
                                     style={{
@@ -537,18 +552,46 @@ export default function LegalPage() {
                                 </Link>
                                 .
                             </p>
+                            <p style={styles.p}>
+                                <strong>Autorité de contrôle (France) :</strong>{" "}
+                                CNIL (Commission nationale de l’informatique et
+                                des libertés).
+                            </p>
                         </section>
 
-                        <section id="reporting" style={styles.section}>
+                        <section id="cookies" style={styles.section}>
+                            <h2 style={styles.h2}>10. Cookies / traceurs</h2>
+                            <p style={styles.p}>
+                                Le site peut utiliser des cookies ou traceurs
+                                strictement nécessaires à son fonctionnement. Si
+                                des traceurs de mesure d’audience ou marketing
+                                sont ajoutés, un mécanisme de consentement sera
+                                mis en place conformément à la réglementation
+                                applicable.
+                            </p>
+                            <p style={styles.p}>
+                                À ce jour, l’application Movenco n’intègre pas
+                                de publicité. Si des services publicitaires sont
+                                ajoutés à l’avenir, les mentions légales et la
+                                politique de confidentialité seront mises à jour
+                                en conséquence.
+                            </p>
+                        </section>
+
+                        <section id="moderation" style={styles.section}>
                             <h2 style={styles.h2}>
                                 11. Signalement & modération
                             </h2>
                             <p style={styles.p}>
-                                Movenco est une application communautaire. En
-                                cas de contenu inapproprié ou de comportement
-                                abusif, des outils de signalement et de
-                                modération peuvent être proposés. Les règles
-                                d’usage et contenus interdits sont décrites dans
+                                Movenco est une application communautaire. Des
+                                mécanismes de signalement, blocage et modération
+                                peuvent être proposés afin de préserver la
+                                sécurité des utilisateurs et la qualité des
+                                échanges.
+                            </p>
+                            <p style={styles.p}>
+                                Les règles d’usage, les comportements interdits
+                                et les mesures de modération sont décrits dans
                                 les{" "}
                                 <Link
                                     href="/terms"
@@ -571,9 +614,12 @@ export default function LegalPage() {
                             <h2 style={styles.h2}>12. Droit applicable</h2>
                             <p style={styles.p}>
                                 Les présentes mentions légales sont soumises au
-                                droit français. En cas de litige, une solution
-                                amiable sera recherchée avant toute action
-                                judiciaire.
+                                droit français.
+                            </p>
+                            <p style={styles.p}>
+                                En cas de litige, une solution amiable sera
+                                recherchée avant toute action judiciaire, sauf
+                                disposition légale contraire.
                             </p>
                             <p style={styles.p}>
                                 Dernière mise à jour : {updatedAt}
