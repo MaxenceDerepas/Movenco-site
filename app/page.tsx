@@ -28,6 +28,9 @@ export const metadata: Metadata = {
     },
 };
 
+const APP_STORE_URL = "#"; // ✅ remplace par ton lien App Store
+const GOOGLE_PLAY_URL = "#"; // ✅ remplace par ton lien Google Play
+
 const palette = {
     primary: "#2b6a5c",
     primary2: "#1f4f45",
@@ -178,6 +181,50 @@ const styles: Record<string, CSSProperties> = {
         color: palette.sub,
         fontSize: 14,
         lineHeight: 1.8,
+    },
+
+    storeRow: {
+        display: "flex",
+        gap: 10,
+        flexWrap: "wrap",
+        marginTop: 14,
+    },
+    storeBtn: {
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 10,
+        textDecoration: "none",
+        padding: "10px 12px",
+        borderRadius: 14,
+        border: `1px solid ${palette.border}`,
+        background: "white",
+        color: palette.text,
+        boxShadow: "0 8px 24px rgba(15,23,42,0.05)",
+    },
+    storeIcon: {
+        width: 34,
+        height: 34,
+        borderRadius: 10,
+        border: `1px solid ${palette.border}`,
+        background: "#f8fafc",
+        display: "grid",
+        placeItems: "center",
+        fontSize: 16,
+        fontWeight: 900,
+    },
+    storeSmall: {
+        margin: 0,
+        color: palette.sub,
+        fontSize: 10,
+        fontWeight: 800,
+        lineHeight: 1.1,
+    },
+    storeBig: {
+        margin: "2px 0 0",
+        color: palette.text,
+        fontSize: 13,
+        fontWeight: 950,
+        lineHeight: 1.1,
     },
 
     heroVisual: {
@@ -382,18 +429,18 @@ export default function HomePage() {
 
                             <div style={styles.heroCtas}>
                                 <a
-                                    href="#contact"
+                                    href="#features"
                                     style={styles.ctaPrimary}
                                     className="btnHover"
                                 >
-                                    🚀 Rejoindre la beta
+                                    Voir les fonctionnalités
                                 </a>
                                 <a
-                                    href="#features"
+                                    href="#contact"
                                     style={styles.ctaSecondary}
                                     className="btnHover"
                                 >
-                                    Voir les fonctionnalités
+                                    Nous contacter
                                 </a>
                             </div>
 
@@ -405,6 +452,44 @@ export default function HomePage() {
                                 <li>🗓️ Events : crée ou rejoins une sortie</li>
                                 <li>💬 Chat : discute en privé ou en groupe</li>
                             </ul>
+
+                            <div style={styles.storeRow}>
+                                <a
+                                    href={APP_STORE_URL}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    style={styles.storeBtn}
+                                    className="btnHover"
+                                    aria-label="Télécharger sur l’App Store"
+                                >
+                                    <span style={styles.storeIcon}></span>
+                                    <span>
+                                        <p style={styles.storeSmall}>
+                                            Télécharger sur
+                                        </p>
+                                        <p style={styles.storeBig}>App Store</p>
+                                    </span>
+                                </a>
+
+                                <a
+                                    href={GOOGLE_PLAY_URL}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    style={styles.storeBtn}
+                                    className="btnHover"
+                                    aria-label="Disponible sur Google Play"
+                                >
+                                    <span style={styles.storeIcon}>▶</span>
+                                    <span>
+                                        <p style={styles.storeSmall}>
+                                            Disponible sur
+                                        </p>
+                                        <p style={styles.storeBig}>
+                                            Google Play
+                                        </p>
+                                    </span>
+                                </a>
+                            </div>
                         </div>
 
                         <div style={styles.heroVisual}>
@@ -464,30 +549,32 @@ export default function HomePage() {
                 <section style={styles.ctaStrip}>
                     <div style={styles.ctaStripInner}>
                         <div>
-                            <p style={styles.ctaStripTitle}>
-                                Movenco arrive bientôt
-                            </p>
+                            <p style={styles.ctaStripTitle}>Movenco</p>
                             <p style={styles.ctaStripText}>
-                                Tu veux suivre le lancement, tester la beta ou
-                                poser une question ? Contacte-nous directement.
+                                Télécharge l’application sur ton store et
+                                retrouve des sportifs près de chez toi.
                             </p>
                         </div>
 
                         <div style={styles.ctaStripBtns}>
                             <a
-                                href="mailto:movencoapp@gmail.com"
+                                href={APP_STORE_URL}
+                                target="_blank"
+                                rel="noreferrer"
                                 style={styles.ctaLight}
                                 className="btnHover"
                             >
-                                📧 movencoapp@gmail.com
+                                 App Store
                             </a>
-                            <Link
-                                href="/support"
+                            <a
+                                href={GOOGLE_PLAY_URL}
+                                target="_blank"
+                                rel="noreferrer"
                                 style={styles.ctaGhost}
                                 className="btnHover"
                             >
-                                Support
-                            </Link>
+                                ▶ Google Play
+                            </a>
                         </div>
                     </div>
                 </section>
@@ -495,7 +582,8 @@ export default function HomePage() {
                 <section id="contact" style={styles.section}>
                     <h2 style={styles.sectionTitle}>Contact</h2>
                     <p style={styles.sectionSub}>
-                        Support, questions, beta ou demandes liées au compte.
+                        Support, questions, demandes liées au compte ou à la
+                        confidentialité.
                     </p>
 
                     <div style={styles.grid3} className="grid3">
@@ -516,9 +604,7 @@ export default function HomePage() {
                         </div>
 
                         <div style={styles.card} className="cardHover">
-                            <h3 style={styles.cardTitle}>
-                                🔒 Données & confidentialité
-                            </h3>
+                            <h3 style={styles.cardTitle}>🔒 Confidentialité</h3>
                             <p style={styles.cardText}>
                                 Consulte la politique de confidentialité et tes
                                 droits RGPD.
